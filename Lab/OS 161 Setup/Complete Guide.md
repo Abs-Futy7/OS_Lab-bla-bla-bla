@@ -1,4 +1,4 @@
-## OS/161 Development Environment: Complete Windows Setup Guide
+## OS/161 Development Environment 
 
 ### Prerequisites & Requirements
 
@@ -103,34 +103,7 @@ EOF
 
 Since we mounted our local directory to the container, any files we edit locally will also be visible inside the container, and vice versa.
 
-### 7. Troubleshooting FAQ
-
-**Q: Docker container fails to start with "docker: command not found"**
-- Ensure Docker Desktop is installed and running
-- Restart Docker Desktop and try again
-- Verify Docker is in your system PATH
-
-**Q: Permission denied errors when building kernel**
-- Run the build script inside the container (not from Windows)
-- Ensure we're in the correct directory: `/root/cs350-os161/`
-
-**Q: Can't connect to tmux session after running the script**
-- The script should attach automatically. If not, manually attach with: `tmux attach-session -t os161`
-- If the session doesn't exist, rebuild the kernel
-
-**Q: GDB won't connect to the kernel**
-- Verify SYS/161 is running in the left pane (you should see output)
-- Try typing `c` in GDB to continue execution
-- Restart both panes with: `tmux kill-session -t os161` and run the build script again
-
-**Q: Mounted directory not showing files**
-- Verify the path in the docker run command matches our local path
-- Check that files were created in the correct location
-- Try listing files: `ls -la /root/cs350-os161/`
-
-**Q: Build fails with "bmake: not found"**
-- Ensure we're running inside the Docker container
-- Run `./configure` in `/root/cs350-os161/os161-1.99/` first
+ 
 
 ### 8. Quick Command Reference
 
@@ -162,35 +135,6 @@ ls -la /root/cs350-os161/
 # Navigate directories
 cd /root/cs350-os161/os161-1.99/
 ```
-
- 
-
-### 9. Quick Reference Checklist
-
-**Setup Checklist:**
-
-- [ ] Docker Desktop installed and running with WSL2 enabled
-- [ ] At least 10GB free disk space available
-- [ ] OS/161 archive downloaded or ready to download
-- [ ] Local workspace directory created (e.g., `D:/cs350-workspace/os161`)
-- [ ] Docker container started with volume mount
-- [ ] OS/161 source code extracted
-- [ ] Build script executed successfully
-- [ ] tmux session running with SYS/161 and GDB
-- [ ] Kernel boots and loads in SYS/161
-- [ ] GDB connects successfully to running kernel
-
-**Workflow Summary Table:**
-
-| Step | Action | Command/Path |
-|------|--------|--------------|
-| 1 | Verify Docker | Docker Desktop running |
-| 2 | Start container | `docker run --volume...` |
-| 3 | Extract OS/161 | `/root/cs350-os161/` |
-| 4 | Build kernel | `bash build-and-run-kernel.sh` |
-| 5 | Access SYS/161 | Left pane of tmux |
-| 6 | Debug with GDB | Right pane of tmux |
-| 7 | Edit files | Local or container editor |
 
 **Key Directories:**
 
