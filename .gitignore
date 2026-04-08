@@ -1,0 +1,15 @@
+# OS/161 generated build output
+root/
+os161-1.99/
+os161-1.99/build/install/
+os161-1.99/kern/compile/
+os161-1.99/userland/lib/libc/syscalls.S
+os161-1.99/userland/lib/libc/vers.c
+os161-1.99/man/
+
+# Local/editor artifacts
+.vscode/
+*.log
+
+# Optional: large archive, keep out of git unless required
+os161.tar.gz
