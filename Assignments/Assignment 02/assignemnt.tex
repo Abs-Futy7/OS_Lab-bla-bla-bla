@@ -1,0 +1,203 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{ragged2e}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{graphicx} % Package to insert images
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\renewcommand{\arraystretch}{1.18}
+\setlist[itemize]{leftmargin=1.4em,itemsep=2pt,topsep=2pt}
+\setlist[enumerate]{leftmargin=1.6em,itemsep=2pt,topsep=2pt}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{L}{>{\RaggedRight\arraybackslash}X}
+
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+
+\tcbset{
+  enhanced,
+  breakable,
+  colback=white,
+  colframe=black,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.7pt,
+  arc=1mm,
+  left=9pt,
+  right=9pt,
+  top=8pt,
+  bottom=8pt,
+  title style={draw=none, fill=none},
+  boxed title style={
+    colback=white,
+    colframe=black,
+    boxrule=0.7pt,
+    arc=0.8mm,
+    left=6pt,
+    right=6pt,
+    top=4pt,
+    bottom=4pt
+  },
+  attach boxed title to top left={xshift=3mm,yshift=-3mm},
+}
+
+\newtcolorbox{mainbox}[1][]{
+  title=#1
+}
+
+\newtcolorbox{databox}[1][]{
+  title=#1,
+  boxrule=0.9pt
+}
+
+\begin{document}
+
+% -------------------- Cover Page --------------------
+\begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+         
+        \IfFileExists{Assignement/dept_logo.png}{%
+            \includegraphics[width=0.2\textwidth]{Assignement/dept_logo.png}\\[1cm]
+        }{%
+            \vspace*{1.8cm}
+        }
+
+        {\fontsize{22}{28}\selectfont\textbf{3rd Year 2nd Semester}}\\[0.4cm]
+        {\fontsize{16}{20}\selectfont University of Dhaka}\\[0.25cm]
+        {\fontsize{16}{20}\selectfont Department of Computer Science and Engineering}\\[0.25cm]
+        {\fontsize{13}{16}\selectfont Session: 2022--2023}
+
+        \vspace{3.2cm}
+
+        {\fontsize{24}{30}\selectfont\textbf{CSE 3211: Operating Systems Lab }}
+
+        \vspace{2.2cm}
+
+        {\fontsize{22}{28}\selectfont\textbf{Assignment 0}}\\[0.45cm]
+        {\fontsize{17}{22}\selectfont Code Walkthrough}
+
+        \vspace{2 cm}
+
+        {\fontsize{18}{24}\selectfont\textbf{Submission Date:}}\\[0.3cm]
+        {\fontsize{15}{19}\selectfont 21/04/2026}
+
+        \vspace{1.6cm}
+
+        {\fontsize{18}{24}\selectfont\textbf{Submitted By:}}\\[0.3cm]
+        {\fontsize{15}{19}\selectfont H.M. Mehedi Hasan}\\[0.2cm]
+        {\fontsize{15}{19}\selectfont Roll: 13}
+    \end{center}
+\end{titlepage}
+
+\setcounter{page}{1}
+
+\section*{Questions and Answers}
+
+\begin{enumerate}
+    \item \textbf{Question:} What is the VM system called that is configured for assignment 0?
+
+    \textbf{Answer:} The VM system configured for ASST0 is \texttt{dumbvm}.
+
+    \item \textbf{Question:} Which register number is used for the stack pointer (sp) in OS/161?
+
+    \textbf{Answer:} The stack pointer register is register 29.
+
+    \item \textbf{Question:} What bus/busses does OS/161 support?
+
+    \textbf{Answer:} OS/161 on System/161 supports LAMEbus.
+
+    \item \textbf{Question:} Why do we use typedefs like \texttt{uint32\_t} instead of simply saying \texttt{int}?
+
+    \textbf{Answer:} We use typedefs like \texttt{uint32\_t} because they specify exact size and signedness, while \texttt{int} can vary between platforms.
+
+    \item \textbf{Question:} What function is called when user-level code generates a fatal fault?
+
+    \textbf{Answer:} The function called is \texttt{kill\_curthread()}.
+
+    \item \textbf{Question:} How frequently are hardclock interrupts generated?
+
+    \textbf{Answer:} Hardclock interrupts are generated \texttt{HZ} times per second. For ASST0, \texttt{HZ} is 100.
+
+    \item \textbf{Question:} How many characters are allowed in an SFS volume name?
+
+    \textbf{Answer:} An SFS volume name has a 32-byte field, so the usable name is at most 31 characters plus the terminating null byte.
+
+    \item \textbf{Question:} How many direct blocks does an SFS file have?
+
+    \textbf{Answer:} An SFS file has 15 direct blocks.
+
+    \item \textbf{Question:} What is the standard interface to a file system?
+
+    \textbf{Answer:} The standard filesystem interface is \texttt{struct fs}, which provides \texttt{fs\_sync}, \texttt{fs\_getvolname}, \texttt{fs\_getroot}, and \texttt{fs\_unmount}.
+
+    \item \textbf{Question:} What function puts a thread to sleep?
+
+    \textbf{Answer:} \texttt{wchan\_sleep()} puts the current thread to sleep.
+
+    \item \textbf{Question:} How large are OS/161 pids?
+
+    \textbf{Answer:} \texttt{pid\_t} is a signed 32-bit type. The configured user-process PID range is 2 through 32767.
+
+    \item \textbf{Question:} What operations can you do on a vnode?
+
+    \textbf{Answer:} Vnode operations include open, close, reclaim, read, readlink, getdirentry, write, ioctl, stat, gettype, tryseek, fsync, mmap, truncate, namefile, creat, symlink, mkdir, link, remove, rmdir, rename, lookup, and lookparent.
+
+    \item \textbf{Question:} What is the maximum path length in OS/161?
+
+    \textbf{Answer:} The maximum path length is \texttt{PATH\_MAX = 1024}.
+
+    \item \textbf{Question:} What is the system call number for a reboot?
+
+    \textbf{Answer:} The system call number for reboot is \texttt{SYS\_reboot = 119}.
+
+    \item \textbf{Question:} Where is \texttt{STDIN\_FILENO} defined?
+
+    \textbf{Answer:} \texttt{STDIN\_FILENO} is defined in \texttt{kern/include/kern/unistd.h} as 0.
+
+    \item \textbf{Question:} What does \texttt{kmain()} do?
+
+    \textbf{Answer:} \texttt{kmain()} initializes the kernel by calling \texttt{boot()} and then enters the kernel menu by calling \texttt{menu(arguments)}.
+
+    \item \textbf{Question:} What is the difference between \texttt{splhigh} and \texttt{spl0}?
+
+    \textbf{Answer:} \texttt{splhigh()} disables interrupts by setting the interrupt priority level high, while \texttt{spl0()} enables interrupts by setting the priority level to zero.
+
+    \item \textbf{Question:} What does \texttt{splx} return?
+
+    \textbf{Answer:} \texttt{splx()} returns the old interrupt priority level before changing it.
+
+    \item \textbf{Question:} What is a zombie?
+
+    \textbf{Answer:} A zombie is a thread that has exited but has not yet been destroyed.
+
+    \item \textbf{Question:} What does a device name in OS/161 look like?
+
+    \textbf{Answer:} A device name looks like \texttt{devname:}, for example \texttt{emu0:} or \texttt{lhd0:}.
+
+    \item \textbf{Question:} What does a raw device name in OS/161 look like?
+
+    \textbf{Answer:} A raw device name appends \texttt{raw} before the colon, for example \texttt{lhd0raw:}.
+
+    \item \textbf{Question:} What lock protects the vnode reference count?
+
+    \textbf{Answer:} The vnode reference count is protected by the global VFS big lock, \texttt{vfs\_biglock}.
+
+    \item \textbf{Question:} What device types are currently supported?
+
+    \textbf{Answer:} The VFS device layer supports block devices and character devices.
+\end{enumerate}
+
+
+
+\end{document}

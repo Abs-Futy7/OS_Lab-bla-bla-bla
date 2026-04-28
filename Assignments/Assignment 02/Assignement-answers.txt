@@ -1,0 +1,368 @@
+Assignment 0: Code Walkthrough Answers With Details
+
+Question 1: What is the VM system called that is configured for assignment 0?
+
+Answer:
+The VM system configured for ASST0 is dumbvm.
+
+Where to find it:
+- os161-1.99/kern/conf/ASST0: enables "options dumbvm".
+- os161-1.99/kern/arch/mips/conf/conf.arch: defines the dumbvm option and
+  maps it to arch/mips/vm/dumbvm.c.
+
+What it does:
+dumbvm is the simple virtual memory implementation supplied for early
+assignments. It handles basic address-space setup and MIPS TLB faults, but it
+is intentionally limited and not a full VM system.
+
+Question 2: Which register number is used for the stack pointer (sp) in OS/161?
+
+Answer:
+The stack pointer register is register 29.
+
+Where to find it:
+- os161-1.99/kern/arch/mips/include/kern/regdefs.h: defines "sp" as "$29".
+
+What it does:
+The stack pointer points to the current top of the active stack. OS/161 uses it
+in low-level MIPS assembly, trap handling, kernel startup, and context switching.
+
+Question 3: What bus/busses does OS/161 support?
+
+Answer:
+System/161 supports LAMEbus. OS/161 also uses a mainbus abstraction, but the
+actual bus implementation for System/161 is LAMEbus.
+
+Where to find it:
+- os161-1.99/kern/arch/sys161/include/bus.h: says the only bus on System/161 is
+  LAMEbus.
+- os161-1.99/kern/arch/sys161/conf/conf.arch: includes the LAMEbus device
+  configuration.
+- os161-1.99/kern/conf/ASST0: configures "device lamebus0".
+
+What it does:
+The bus connects the simulated CPU to hardware devices such as disks, timers,
+serial ports, random devices, and trace devices. The bus layer provides register
+I/O, device attachment, and interrupt routing.
+
+Question 4: Why do we use typedefs like uint32_t instead of simply saying "int"?
+
+Answer:
+Types such as uint32_t specify exact size and signedness. A plain int can vary
+between platforms and compilers.
+
+Where to find it:
+- os161-1.99/kern/include/types.h: maps uint32_t to __u32.
+- os161-1.99/kern/include/kern/types.h: defines many OS-visible kernel and
+  user ABI types.
+
+What it does:
+Fixed-size types make kernel structures, disk formats, device registers, system
+call arguments, and binary interfaces predictable. For example, a 32-bit disk
+block number or register field must stay 32 bits even if the compiler's int size
+changes.
+
+Question 5: What function is called when user-level code generates a fatal fault?
+
+Answer:
+kill_curthread() is called.
+
+Where to find it:
+- os161-1.99/kern/arch/mips/locore/trap.c: defines kill_curthread().
+- os161-1.99/kern/arch/mips/locore/trap.c: mips_trap() calls kill_curthread()
+  for fatal faults from user mode.
+
+What it does:
+mips_trap() handles CPU exceptions. If the exception is from user mode and the
+kernel cannot handle it, kill_curthread() chooses the matching signal type, prints
+the trap information, and currently panics because process killing is not fully
+implemented yet.
+
+Question 6: How frequently are hardclock interrupts generated?
+
+Answer:
+hardclock() is called HZ times per second. For ASST0, HZ is 100.
+
+Where to find it:
+- os161-1.99/kern/include/clock.h: defines HZ as 100 normally, or 10000 when
+  synchprobs is enabled.
+- os161-1.99/kern/thread/clock.c: hardclock() is the scheduler clock handler.
+
+What it does:
+hardclock() updates CPU clock counters and periodically triggers scheduling and
+thread migration checks. In this tree it also calls thread_yield().
+
+Question 7: How many characters are allowed in an SFS volume name?
+
+Answer:
+SFS has a 32-byte volume-name field. Because it is stored as a C string, the
+usable volume name is at most 31 characters plus the terminating null byte.
+
+Where to find it:
+- os161-1.99/kern/include/kern/sfs.h: defines SFS_VOLNAME_SIZE as 32 and uses it
+  for sp_volname.
+- os161-1.99/user/sbin/mksfs/mksfs.c: rejects names where strlen(volname) is
+  greater than or equal to SFS_VOLNAME_SIZE.
+
+What it does:
+The volume name is stored in the SFS superblock. VFS can use this name as an
+alternate way to refer to a mounted filesystem.
+
+Question 8: How many direct blocks does an SFS file have?
+
+Answer:
+An SFS inode has 15 direct blocks.
+
+Where to find it:
+- os161-1.99/kern/include/kern/sfs.h: defines SFS_NDIRECT as 15.
+- os161-1.99/kern/include/kern/sfs.h: struct sfs_inode has
+  sfi_direct[SFS_NDIRECT].
+- os161-1.99/kern/fs/sfs/sfs_vnode.c: uses SFS_NDIRECT when mapping file blocks.
+
+What it does:
+Direct blocks point straight from the inode to data blocks. Once a file grows
+beyond those 15 direct blocks, SFS uses the inode's indirect block.
+
+Question 9: What is the standard interface to a file system?
+
+Answer:
+The standard filesystem interface is struct fs. A filesystem must provide
+fs_sync, fs_getvolname, fs_getroot, and fs_unmount.
+
+Where to find it:
+- os161-1.99/kern/include/fs.h: defines struct fs and the FSOP_* macros.
+- os161-1.99/kern/fs/sfs/sfs_fs.c: fills in these function pointers for SFS.
+
+What it does:
+struct fs is the filesystem-level interface used by VFS. It lets VFS flush a
+filesystem, get its volume name, get its root vnode, and unmount it without
+knowing whether the filesystem is SFS, emufs, or something else.
+
+Question 10: What function puts a thread to sleep?
+
+Answer:
+wchan_sleep() puts the current thread to sleep on a wait channel.
+
+Where to find it:
+- os161-1.99/kern/include/wchan.h: declares wchan_sleep().
+- os161-1.99/kern/thread/thread.c: implements wchan_sleep() and calls
+  thread_switch(S_SLEEP, wc).
+- os161-1.99/kern/thread/synch.c: semaphores use wchan_sleep().
+
+What it does:
+A wait channel is a queue of sleeping threads waiting for some event. The caller
+locks the wait channel, calls wchan_sleep(), and the thread stops running until
+some other code calls wchan_wakeone() or wchan_wakeall().
+
+Question 11: How large are OS/161 pids?
+
+Answer:
+pid_t is a signed 32-bit type. The configured user-process PID range is 2
+through 32767.
+
+Where to find it:
+- os161-1.99/kern/include/kern/types.h: typedefs __pid_t as __i32.
+- os161-1.99/kern/include/types.h: typedefs pid_t as __pid_t.
+- os161-1.99/kern/include/kern/limits.h: defines __PID_MIN as 2 and __PID_MAX as
+  32767.
+
+What it does:
+pid_t is the type used by process-related system calls such as getpid(),
+waitpid(), and fork(). The type is 32 bits, while PID_MIN and PID_MAX define the
+range OS/161 intends to assign to user processes.
+
+Question 12: What operations can you do on a vnode?
+
+Answer:
+Vnode operations include open, close, reclaim, read, readlink, getdirentry,
+write, ioctl, stat, gettype, tryseek, fsync, mmap, truncate, namefile, creat,
+symlink, mkdir, link, remove, rmdir, rename, lookup, and lookparent. Vnode helper
+operations also manage reference counts and open counts.
+
+Where to find it:
+- os161-1.99/kern/include/vnode.h: defines struct vnode_ops and VOP_* macros.
+- os161-1.99/kern/vfs/vnode.c: implements common vnode bookkeeping helpers such
+  as vnode_incref(), vnode_decref(), vnode_incopen(), and vnode_decopen().
+- os161-1.99/kern/fs/sfs/sfs_vnode.c: provides concrete SFS vnode operation
+  tables.
+
+What it does:
+A vnode is the filesystem-independent representation of a file, directory, or
+device. VFS calls VOP_* operations so higher-level code can work with files
+without knowing which filesystem or device implements them.
+
+Question 13: What is the maximum path length in OS/161?
+
+Answer:
+The maximum path length is PATH_MAX = 1024.
+
+Where to find it:
+- os161-1.99/kern/include/kern/limits.h: defines __PATH_MAX as 1024.
+- os161-1.99/kern/include/limits.h: exposes PATH_MAX as __PATH_MAX.
+
+What it does:
+PATH_MAX limits the length of full path strings used by path-handling code, such
+as VFS lookup and current-working-directory operations.
+
+Question 14: What is the system call number for a reboot?
+
+Answer:
+SYS_reboot is system call number 119.
+
+Where to find it:
+- os161-1.99/kern/include/kern/syscall.h: defines SYS_reboot as 119.
+- os161-1.99/kern/arch/mips/syscall/syscall.c: dispatches SYS_reboot.
+- os161-1.99/kern/startup/main.c: implements sys_reboot().
+
+What it does:
+The reboot system call requests reboot, halt, or poweroff. sys_reboot() validates
+the requested action, shuts down kernel subsystems, and then calls the mainbus
+machine-control function.
+
+Question 15: Where is STDIN_FILENO defined?
+
+Answer:
+STDIN_FILENO is defined as 0 in kern/include/kern/unistd.h.
+
+Where to find it:
+- os161-1.99/kern/include/kern/unistd.h: defines STDIN_FILENO, STDOUT_FILENO,
+  and STDERR_FILENO.
+- os161-1.99/user/include/unistd.h: includes kern/unistd.h so user programs can
+  use those constants.
+
+What it does:
+STDIN_FILENO names the conventional standard input file descriptor. STDOUT_FILENO
+and STDERR_FILENO similarly name standard output and standard error.
+
+Question 16: What does kmain() do?
+
+Answer:
+kmain() calls boot() to initialize the kernel, then calls menu(arguments).
+
+Where to find it:
+- os161-1.99/kern/startup/main.c: defines boot(), shutdown(), sys_reboot(), and
+  kmain().
+
+What it does:
+boot() prints version information, initializes RAM, processes, threads, clocks,
+VFS, devices, VM, console printing, and secondary CPUs. It also sets the default
+boot filesystem to emu0. After booting, kmain() enters the OS/161 kernel menu so
+you can run commands, tests, and user programs.
+
+Question 17: What is the difference between splhigh and spl0?
+
+Answer:
+splhigh() disables interrupts on the current CPU by setting IPL_HIGH. spl0()
+enables interrupts by setting IPL_NONE.
+
+Where to find it:
+- os161-1.99/kern/include/spl.h: documents spl0(), splhigh(), and splx().
+- os161-1.99/kern/thread/spl.c: implements interrupt priority changes.
+
+What it does:
+OS/161 uses spl functions to protect critical kernel sections from interrupts on
+the current CPU. splhigh() is commonly used before code that must not be
+interrupted; splx(oldstate) restores the earlier state afterward.
+
+Question 18: What does splx return?
+
+Answer:
+splx() returns the old interrupt priority level before changing to the requested
+level.
+
+Where to find it:
+- os161-1.99/kern/include/spl.h: states that spl0(), splhigh(), and splx() all
+  return the old interrupt state.
+- os161-1.99/kern/thread/spl.c: splx() stores the old value in ret and returns
+  it.
+
+What it does:
+This lets code save the old interrupt state, raise the priority level, perform a
+critical operation, and then restore the original state. Typical pattern:
+"int s = splhigh(); ...; splx(s);".
+
+Question 19: What is a zombie?
+
+Answer:
+A zombie is a thread that has exited but has not yet been destroyed.
+
+Where to find it:
+- os161-1.99/kern/include/thread.h: defines S_ZOMBIE as "zombie; exited but not
+  yet deleted".
+- os161-1.99/kern/thread/thread.c: thread_exit() switches the current thread to
+  S_ZOMBIE, and exorcise() later destroys zombie threads.
+
+What it does:
+A thread cannot safely destroy its own stack while it is still running on that
+stack. OS/161 marks it as a zombie and lets another thread clean it up later.
+
+Question 20: What does a device name in OS/161 look like?
+
+Answer:
+A device name in pathname syntax looks like "devname:", for example "emu0:" or
+"lhd0:".
+
+Where to find it:
+- os161-1.99/kern/include/vfs.h: documents that devices are accessible as
+  "DEVNAME:".
+- os161-1.99/kern/vfs/vfslookup.c: parses "device:path" syntax by looking for a
+  colon.
+- os161-1.99/kern/vfs/vfslist.c: stores known device names in kd_name.
+
+What it does:
+The part before the colon chooses the filesystem or device. The part after the
+colon is interpreted as a path relative to that device or filesystem.
+
+Question 21: What does a raw device name in OS/161 look like?
+
+Answer:
+A raw device name appends "raw" before the colon, for example "lhd0raw:".
+
+Where to find it:
+- os161-1.99/kern/vfs/vfslist.c: comments give "lhd0raw" as the raw device name
+  example.
+- os161-1.99/kern/vfs/vfslist.c: mkrawname() creates a raw name by appending
+  "raw".
+- os161-1.99/kern/include/vfs.h: documents that a mountable device can be
+  accessed as "DEVNAMEraw:".
+
+What it does:
+The normal name, such as "lhd0:", refers to the mounted filesystem when one is
+mounted. The raw name, such as "lhd0raw:", refers directly to the underlying
+device, which is useful for tools like mksfs.
+
+Question 22: What lock protects the vnode reference count?
+
+Answer:
+The vnode reference count is protected by the global VFS big lock, vfs_biglock.
+
+Where to find it:
+- os161-1.99/kern/vfs/vnode.c: vnode_incref() and vnode_decref() acquire
+  vfs_biglock before changing vn_refcount.
+- os161-1.99/kern/vfs/vfslist.c: defines vfs_biglock and its acquire/release
+  functions.
+- os161-1.99/kern/include/vfs.h: declares vfs_biglock_acquire() and
+  vfs_biglock_release().
+
+What it does:
+The lock serializes VFS operations in this teaching kernel. For vnode reference
+counts, it prevents two threads from incrementing, decrementing, or reclaiming
+the same vnode at the same time.
+
+Question 23: What device types are currently supported?
+
+Answer:
+The VFS device layer currently distinguishes block devices and character
+devices.
+
+Where to find it:
+- os161-1.99/kern/vfs/device.c: dev_gettype() returns S_IFBLK when d_blocks > 0,
+  otherwise S_IFCHR.
+- os161-1.99/kern/include/kern/stattypes.h: defines S_IFBLK as block device and
+  S_IFCHR as character device.
+- os161-1.99/kern/include/device.h: struct device has d_blocks and d_blocksize.
+
+What it does:
+Block devices have a known size and block size, so seeking is allowed only on
+block boundaries. Character devices are stream-like devices, such as console or
+random devices, and seeking is not allowed.
