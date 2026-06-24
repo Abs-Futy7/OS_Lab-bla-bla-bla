@@ -1,0 +1,201 @@
+
+========== CPU Scheduling Menu ==========
+1. First-Come, First-Served (FCFS)
+2. Shortest Job First (SJF)
+3. Shortest Remaining Time Next (SRTN)
+4. Round Robin (RR)
+5. Lottery Scheduling
+0. Exit
+Enter your choice: 
+Enter number of processes: Enter burst times:
+P1: P2: P3: P4: P5: 
+===== FCFS Scheduling =====
+Process    Burst(ms)       Waiting(ms)     Turnaround(ms) 
+--------------------------------------------------------------
+P1         6               0               6              
+P2         8               6               14             
+P3         3               14              17             
+P4         7               17              24             
+P5         4               24              28             
+
+Average Waiting Time    : 12.20 ms
+Average Turnaround Time : 17.80 ms
+
+========== CPU Scheduling Menu ==========
+1. First-Come, First-Served (FCFS)
+2. Shortest Job First (SJF)
+3. Shortest Remaining Time Next (SRTN)
+4. Round Robin (RR)
+5. Lottery Scheduling
+0. Exit
+Enter your choice: 
+Enter number of processes: Enter burst times:
+P1: P2: P3: P4: P5: 
+===== SJF Scheduling =====
+Process    Burst(ms)       Waiting(ms)     Turnaround(ms) 
+--------------------------------------------------------------
+P3         3               0               3              
+P5         4               3               7              
+P1         6               7               13             
+P4         7               13              20             
+P2         8               20              28             
+
+Average Waiting Time    : 8.60 ms
+Average Turnaround Time : 14.20 ms
+
+========== CPU Scheduling Menu ==========
+1. First-Come, First-Served (FCFS)
+2. Shortest Job First (SJF)
+3. Shortest Remaining Time Next (SRTN)
+4. Round Robin (RR)
+5. Lottery Scheduling
+0. Exit
+Enter your choice: 
+Enter number of processes: Enter arrival time and burst time for each process:
+P1 arrival: P1 burst: P2 arrival: P2 burst: P3 arrival: P3 burst: P4 arrival: P4 burst: 
+===== SRTN Scheduling =====
+Process    Arrival      Burst        Completion     Waiting      Turnaround    
+----------------------------------------------------------------------
+P1         0            8            17             9            17            
+P2         1            4            5              0            4             
+P3         2            9            26             15           24            
+P4         3            5            10             2            7             
+
+Average Waiting Time    : 6.50 ms
+Average Turnaround Time : 13.00 ms
+
+========== CPU Scheduling Menu ==========
+1. First-Come, First-Served (FCFS)
+2. Shortest Job First (SJF)
+3. Shortest Remaining Time Next (SRTN)
+4. Round Robin (RR)
+5. Lottery Scheduling
+0. Exit
+Enter your choice: 
+Enter number of processes: Enter burst times:
+P1: P2: P3: Enter time quantum: 
+===== Round Robin Scheduling (Quantum = 4 ms) =====
+Gantt Chart: [P1: 0-4] [P2: 4-7] [P3: 7-10] [P1: 10-14] [P1: 14-18] [P1: 18-22] [P1: 22-26] [P1: 26-30] 
+
+Process    Burst(ms)       Waiting(ms)     Turnaround(ms) 
+--------------------------------------------------------------
+P1         24              6               30             
+P2         3               4               7              
+P3         3               7               10             
+
+Average Waiting Time    : 5.67 ms
+Average Turnaround Time : 15.67 ms
+
+========== CPU Scheduling Menu ==========
+1. First-Come, First-Served (FCFS)
+2. Shortest Job First (SJF)
+3. Shortest Remaining Time Next (SRTN)
+4. Round Robin (RR)
+5. Lottery Scheduling
+0. Exit
+Enter your choice: 
+Enter number of processes: Enter burst times:
+P1: P2: P3: Enter time quantum: 
+===== Round Robin Scheduling (Quantum = 2 ms) =====
+Gantt Chart: [P1: 0-2] [P2: 2-4] [P3: 4-6] [P1: 6-8] [P2: 8-9] [P3: 9-10] [P1: 10-12] [P1: 12-14] [P1: 14-16] [P1: 16-18] [P1: 18-20] [P1: 20-22] [P1: 22-24] [P1: 24-26] [P1: 26-28] [P1: 28-30] 
+
+Process    Burst(ms)       Waiting(ms)     Turnaround(ms) 
+--------------------------------------------------------------
+P1         24              6               30             
+P2         3               6               9              
+P3         3               7               10             
+
+Average Waiting Time    : 6.33 ms
+Average Turnaround Time : 16.33 ms
+
+========== CPU Scheduling Menu ==========
+1. First-Come, First-Served (FCFS)
+2. Shortest Job First (SJF)
+3. Shortest Remaining Time Next (SRTN)
+4. Round Robin (RR)
+5. Lottery Scheduling
+0. Exit
+Enter your choice: 
+Enter number of processes: Enter burst time and tickets for each process:
+P1 burst: P1 tickets: P2 burst: P2 tickets: P3 burst: P3 tickets: Enter time quantum: 
+--- Lottery Run 1 ---
+===== Lottery Scheduling (Quantum = 2 ms) =====
+Time     Winner     Ticket    
+----------------------------------
+t=0      P1      ticket #1
+t=2      P2      ticket #20
+t=4      P2      ticket #20
+t=6      P2      ticket #15
+t=8      P1      ticket #2
+t=10     P1      ticket #1
+t=12     P1      ticket #6
+t=14     P3      ticket #14
+t=16     P1      ticket #5
+t=18     P3      ticket #1
+
+Process    Burst(ms)    Tickets    Completion     Waiting      Turnaround    
+--------------------------------------------------------------------------
+P1         10           10         18             8            18            
+P2         6            20         8              2            8             
+P3         4            5          20             16           20            
+
+Average Waiting Time    : 8.67 ms
+Average Turnaround Time : 15.33 ms
+
+--- Lottery Run 2 ---
+===== Lottery Scheduling (Quantum = 2 ms) =====
+Time     Winner     Ticket    
+----------------------------------
+t=0      P1      ticket #0
+t=2      P1      ticket #0
+t=4      P2      ticket #18
+t=6      P1      ticket #7
+t=8      P2      ticket #10
+t=10     P1      ticket #1
+t=12     P1      ticket #1
+t=14     P2      ticket #11
+t=16     P3      ticket #3
+t=18     P3      ticket #2
+
+Process    Burst(ms)    Tickets    Completion     Waiting      Turnaround    
+--------------------------------------------------------------------------
+P1         10           10         14             4            14            
+P2         6            20         16             10           16            
+P3         4            5          20             16           20            
+
+Average Waiting Time    : 10.00 ms
+Average Turnaround Time : 16.67 ms
+
+--- Lottery Run 3 ---
+===== Lottery Scheduling (Quantum = 2 ms) =====
+Time     Winner     Ticket    
+----------------------------------
+t=0      P2      ticket #16
+t=2      P1      ticket #9
+t=4      P2      ticket #16
+t=6      P2      ticket #21
+t=8      P1      ticket #9
+t=10     P1      ticket #7
+t=12     P3      ticket #10
+t=14     P1      ticket #0
+t=16     P1      ticket #1
+t=18     P3      ticket #0
+
+Process    Burst(ms)    Tickets    Completion     Waiting      Turnaround    
+--------------------------------------------------------------------------
+P1         10           10         18             8            18            
+P2         6            20         8              2            8             
+P3         4            5          20             16           20            
+
+Average Waiting Time    : 8.67 ms
+Average Turnaround Time : 15.33 ms
+
+========== CPU Scheduling Menu ==========
+1. First-Come, First-Served (FCFS)
+2. Shortest Job First (SJF)
+3. Shortest Remaining Time Next (SRTN)
+4. Round Robin (RR)
+5. Lottery Scheduling
+0. Exit
+Enter your choice: 
+Exiting program.

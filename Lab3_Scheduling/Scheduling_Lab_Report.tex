@@ -1,0 +1,223 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{graphicx}
+
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{gray!10},
+    breaklines=true,
+    columns=fullflexible,
+    frame=single,
+    framesep=6pt,
+    rulecolor=\color{gray!55},
+    numbers=left,
+    numberstyle=\tiny,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{teal},
+    showstringspaces=false,
+    tabsize=4
+}
+
+\title{CPU Scheduling Algorithms Lab Report}
+\author{Name: Abu Bakar Siddique\\Roll: 47}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Theory}
+
+CPU scheduling decides which ready process will use the CPU next. In this lab, the following algorithms were implemented.
+
+\subsection{First-Come, First-Served}
+
+FCFS is a non-preemptive algorithm. Processes execute in the same order in which they arrive. For processes with arrival time 0:
+
+\[
+WT_i = \sum_{j=1}^{i-1} BT_j
+\]
+
+\[
+TAT_i = WT_i + BT_i
+\]
+
+\subsection{Shortest Job First}
+
+SJF is a non-preemptive algorithm. It selects the process with the smallest CPU burst time. If two processes have the same burst time, FCFS order is preserved.
+
+\subsection{Shortest Remaining Time Next}
+
+SRTN is the preemptive version of SJF. At each time unit, the process with the minimum remaining burst time is selected.
+
+\[
+TAT_i = CT_i - AT_i
+\]
+
+\[
+WT_i = TAT_i - BT_i
+\]
+
+\subsection{Round Robin}
+
+Round Robin is a preemptive scheduling algorithm. Each process gets the CPU for at most one time quantum. If it is not finished, it goes back to the ready queue.
+
+\subsection{Lottery Scheduling}
+
+Lottery Scheduling is probabilistic. Each process receives a number of tickets. At each scheduling decision, a random ticket is drawn, and the process holding that ticket gets the CPU for one time quantum.
+
+\newcommand{\resultimage}[2]{
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth,height=0.45\textheight,keepaspectratio]{#1}
+\caption{#2}
+\end{figure}
+}
+
+\section{Results}
+
+\subsection{FCFS Result}
+
+Input burst times: 6, 8, 3, 7, 4 ms.
+
+\begin{table}[H]
+\centering
+\caption{FCFS scheduling output}
+\begin{tabular}{cccc}
+\toprule
+\textbf{Process} & \textbf{Burst Time} & \textbf{Waiting Time} & \textbf{Turnaround Time} \\
+\midrule
+P1 & 6 & 0 & 6 \\
+P2 & 8 & 6 & 14 \\
+P3 & 3 & 14 & 17 \\
+P4 & 7 & 17 & 24 \\
+P5 & 4 & 24 & 28 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\resultimage{fcfs.png}{FCFS output screenshot}
+
+Average waiting time = 12.20 ms. Average turnaround time = 17.80 ms.
+
+\subsection{SJF Result}
+
+The same process set was used for SJF.
+
+\begin{table}[H]
+\centering
+\caption{SJF scheduling output}
+\begin{tabular}{cccc}
+\toprule
+\textbf{Process} & \textbf{Burst Time} & \textbf{Waiting Time} & \textbf{Turnaround Time} \\
+\midrule
+P3 & 3 & 0 & 3 \\
+P5 & 4 & 3 & 7 \\
+P1 & 6 & 7 & 13 \\
+P4 & 7 & 13 & 20 \\
+P2 & 8 & 20 & 28 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\resultimage{sjf.png}{SJF output screenshot}
+
+Average waiting time = 8.60 ms. Average turnaround time = 14.20 ms.
+
+\subsection{FCFS and SJF Comparison}
+
+\begin{table}[H]
+\centering
+\caption{Comparison between FCFS and SJF}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Algorithm} & \textbf{Average Waiting Time} & \textbf{Average Turnaround Time} \\
+\midrule
+FCFS & 12.20 ms & 17.80 ms \\
+SJF & 8.60 ms & 14.20 ms \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For the same process set, SJF gives a lower average waiting time than FCFS because shorter jobs are executed earlier.
+
+\subsection{SRTN Result}
+
+\begin{table}[H]
+\centering
+\caption{SRTN scheduling output}
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Process} & \textbf{Arrival} & \textbf{Burst} & \textbf{Completion} & \textbf{Waiting} & \textbf{Turnaround} \\
+\midrule
+P1 & 0 & 8 & 17 & 9 & 17 \\
+P2 & 1 & 4 & 5 & 0 & 4 \\
+P3 & 2 & 9 & 26 & 15 & 24 \\
+P4 & 3 & 5 & 10 & 2 & 7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\resultimage{srtn.png}{SRTN output screenshot}
+
+Average waiting time = 6.50 ms. Average turnaround time = 13.00 ms. This demonstrates preemption because P1 starts first, but P2 arrives at time 1 with a shorter remaining time and preempts P1.
+
+\subsection{Round Robin Result}
+
+Input burst times: 24, 3, 3 ms.
+
+\begin{table}[H]
+\centering
+\caption{Round Robin comparison}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Quantum} & \textbf{Average Waiting Time} & \textbf{Average Turnaround Time} \\
+\midrule
+4 ms & 5.67 ms & 15.67 ms \\
+2 ms & 6.33 ms & 16.33 ms \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\resultimage{rr.png}{Round Robin output screenshot}
+
+For this input, quantum 4 ms performs slightly better than quantum 2 ms in both average waiting time and average turnaround time.
+
+\subsection{Lottery Scheduling Result}
+
+Input: P1 burst = 10, tickets = 10; P2 burst = 6, tickets = 20; P3 burst = 4, tickets = 5; quantum = 2 ms.
+
+\begin{table}[H]
+\centering
+\caption{Lottery Scheduling three-run comparison}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Run} & \textbf{Average Waiting Time} & \textbf{Average Turnaround Time} \\
+\midrule
+1 & 8.67 ms & 15.33 ms \\
+2 & 10.00 ms & 16.67 ms \\
+3 & 8.67 ms & 15.33 ms \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\resultimage{lottery.png}{Lottery Scheduling output screenshot}
+
+The three runs produced different execution orders, which shows the probabilistic nature of Lottery Scheduling.
+
+\appendix
+
+\section{Source Code}
+
+\lstinputlisting[language=C,caption={scheduling.c}]{scheduling.c}
+
+\end{document}
