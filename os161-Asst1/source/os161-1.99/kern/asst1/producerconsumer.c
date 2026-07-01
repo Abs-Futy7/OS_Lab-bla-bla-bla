@@ -12,10 +12,12 @@
    However, you should not have a buffer bigger than BUFFER_SIZE
 */
 
-static data_item_t *item_buffer[BUFFER_SIZE];
-static int producer_index, consumer_index;
+static data_item_t *item_buffer[BUFFER_SIZE];  /* fixed-size shared FIFO buffer */
+static int producer_index, consumer_index;     /* next write and next read slots */
 
-static struct semaphore *mutex, *empty, *full;
+static struct semaphore *mutex; /* binary semaphore: protects buffer indices */
+static struct semaphore *empty; /* counts currently empty buffer slots */
+static struct semaphore *full;  /* counts currently occupied buffer slots */
 
 
 /* consumer_receive() is called by a consumer to request more data. It
@@ -26,15 +28,15 @@ data_item_t * consumer_receive(void)
 {
         data_item_t * item;
 
-        P(full);
-        P(mutex);
+        P(full);   /* wait until at least one item exists */
+        P(mutex);  /* enter critical section for buffer/index access */
 
         /* Remove the oldest item from the circular buffer. */
-        item = item_buffer[consumer_index];
-        consumer_index = (consumer_index + 1) % BUFFER_SIZE;
+        item = item_buffer[consumer_index]; /* take oldest queued item */
+        consumer_index = (consumer_index + 1) % BUFFER_SIZE; /* circular read */
         
-        V(mutex);
-        V(empty); 
+        V(mutex);  /* leave critical section */
+        V(empty);  /* signal one newly free slot */
         
 
         return item;
@@ -46,14 +48,14 @@ data_item_t * consumer_receive(void)
 
 void producer_send(data_item_t *item)
 {
-        P(empty);
-        P(mutex);
+        P(empty);  /* wait until there is room to insert */
+        P(mutex);  /* enter critical section for buffer/index access */
         
         /* Add the newest item to the circular buffer. */
-        item_buffer[producer_index] = item;
-        producer_index = (producer_index + 1) % BUFFER_SIZE;
-        V(mutex);
-        V(full);
+        item_buffer[producer_index] = item; /* store item at next write slot */
+        producer_index = (producer_index + 1) % BUFFER_SIZE; /* circular write */
+        V(mutex);  /* leave critical section */
+        V(full);   /* signal one newly available item */
 }
 
 
@@ -65,23 +67,23 @@ void producer_send(data_item_t *item)
 void producerconsumer_startup(void)
 {
 
-   producer_index = 0;
-   consumer_index = 0;
+   producer_index = 0; /* first producer writes at slot 0 */
+   consumer_index = 0; /* first consumer reads from slot 0 */
 
-   mutex = sem_create("mutex", 1);
+   mutex = sem_create("mutex", 1); /* one thread may touch the queue at once */
    KASSERT(mutex != 0);
 
-   empty = sem_create("empty", BUFFER_SIZE);
+   empty = sem_create("empty", BUFFER_SIZE); /* initially all slots are empty */
    KASSERT(empty != 0);
 
-   full = sem_create("full", 0);
+   full = sem_create("full", 0); /* initially no items are available */
    KASSERT(full != 0);
 }
 
 /* Perform any clean-up you need here */
 void producerconsumer_shutdown(void)
 {
-   sem_destroy(mutex);
+   sem_destroy(mutex); /* free synchronization objects created at startup */
    sem_destroy(empty);
    sem_destroy(full);
 }

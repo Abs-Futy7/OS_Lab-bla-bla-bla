@@ -41,7 +41,7 @@ struct semaphore *finished;
  * **********************************************************************
  */
 
-struct lock *math_lock;
+struct lock *math_lock; /* protects shared counter read/check/increment */
 
 
 
@@ -82,18 +82,18 @@ static void adder(void * unusedpointer, unsigned long addernumber)
                 /* loop doing increments until we achieve the overall number
                    of increments */
 
-                lock_acquire(math_lock);
+                lock_acquire(math_lock); /* enter counter critical section */
 
-                a = counter;
+                a = counter; /* read shared counter while locked */
                 if (a < NADDS) {
 
-                        counter = counter + 1;
+                        counter = counter + 1; /* single protected increment */
 
                         math_test_1(addernumber); /* We use this for testing, please leave this here. */
 
-                        b = counter;
+                        b = counter; /* read back while still locked */
 
-                        lock_release(math_lock);
+                        lock_release(math_lock); /* keep rest outside lock */
 
                         math_test_2(addernumber); /* We use this for testing, please leave this here.
                                                    * Also note it should NOT execute mutually exclusively
@@ -105,7 +105,7 @@ static void adder(void * unusedpointer, unsigned long addernumber)
                          * Note: An individual array location is only accessed by a single
                          * thread and has no concurrency issues.
                          */
-                        adder_counters[addernumber]++;
+                        adder_counters[addernumber]++; /* private slot per thread */
 
                         /* check we are getting sane results. This should not print in a correct
                          * solution.
@@ -115,13 +115,13 @@ static void adder(void * unusedpointer, unsigned long addernumber)
                                         addernumber, a, b) ;
                         }
                 } else {
-                        lock_release(math_lock);
+                        lock_release(math_lock); /* release before exiting loop */
                         flag = 0;
                 }
         }
 
         /* signal the main thread we have finished and then exit */
-        V(finished);
+        V(finished); /* wake main maths() waiter */
 
         thread_exit();
 }
@@ -157,7 +157,7 @@ int maths (int data1, char **data2)
 
         /* create a semaphore to allow main thread to wait on workers */
 
-        finished = sem_create("finished", 0);
+        finished = sem_create("finished", 0); /* joins all adder threads */
 
         if (finished == NULL) {
                 panic("maths: sem create failed");
@@ -169,7 +169,7 @@ int maths (int data1, char **data2)
          * ********************************************************************
          */
 
-        math_lock = lock_create("math lock");
+        math_lock = lock_create("math lock"); /* guards counter only */
 
         if (math_lock == NULL) {
                 panic("maths: lock create failed");
@@ -203,7 +203,7 @@ int maths (int data1, char **data2)
          */
 
         for (index = 0; index < NADDERS; index++) {
-                P(finished);
+                P(finished); /* wait for one adder to finish */
         }
 
         kprintf("Adder threads performed %ld adds\n", counter);
