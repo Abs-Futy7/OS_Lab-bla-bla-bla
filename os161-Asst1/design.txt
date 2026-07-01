@@ -1,0 +1,36 @@
+Assignment 1 Design
+===================
+
+This solution covers the ASST1 synchronization problems: concurrent
+mathematics, bounded-buffer producer/consumer, and bar synchronization. The
+local OS/161 locks and condition variables were also completed because the
+assignment code depends on working locks.
+
+For the mathematics problem, the shared resource is the global counter. A lock
+protects the critical section that reads the counter, checks whether more
+increments are needed, increments it, and records the value used by the tester.
+The per-thread statistics array does not need a shared lock because each adder
+updates only its own slot. The main thread waits for all adders using a
+counting semaphore.
+
+For producer/consumer, the shared resource is a fixed-size circular FIFO buffer
+of BUFFER_SIZE data-item pointers. The empty semaphore counts free slots, the
+full semaphore counts occupied slots, and the mutex semaphore protects the
+head/tail indices and buffer entries. A producer waits for an empty slot before
+inserting; a consumer waits for a full slot before removing. This prevents
+overwrites, lost items, empty reads, and busy waiting.
+
+For the bar, customers are producers of drink orders and bartenders are
+consumers. Orders are stored in a bounded circular queue protected by empty and
+full semaphores plus an order lock. Each order has a private completion
+semaphore, so the customer sleeps until a bartender fills the glass. Bottles
+are protected by one lock per bottle. When a drink needs multiple bottles, the
+bottle numbers are sorted and acquired in increasing order, which prevents
+deadlock while still allowing bartenders using different bottles to mix in
+parallel. The final customer enqueues one invalid closing order per bartender,
+allowing all bartenders to wake and go home after all real orders are served.
+
+The lock implementation uses a spinlock to protect internal state, a wait
+channel for sleepers, a held flag, and an owner pointer for lock_do_i_hold().
+Condition variables use wait channels and Mesa semantics: cv_wait releases the
+caller lock, sleeps, and reacquires the lock after waking.
