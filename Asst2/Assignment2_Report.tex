@@ -1,0 +1,161 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray}
+}
+
+\newcommand{\screenshotfig}[2]{
+\begin{figure}[H]
+\centering
+\IfFileExists{#1}{\includegraphics[width=0.9\textwidth]{#1}}{\fbox{\parbox[c][2in][c]{0.85\textwidth}{\centering Screenshot pending: \texttt{#1}}}}
+\caption{#2}
+\end{figure}
+}
+
+\title{OS/161 Assignment 2 Report}
+\author{Student Name: \underline{\hspace{5cm}}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+
+Assignment 2 implements OS/161 kernel synchronization primitives, process-related system calls, and basic file system calls. The completed work includes locks, condition variables, process IDs, \texttt{fork}, \texttt{getpid}, \texttt{waitpid}, \texttt{\_exit}, \texttt{execv}, \texttt{open}, \texttt{read}, \texttt{write}, \texttt{close}, \texttt{remove}, file creation, append mode, and argument passing for both \texttt{execv} and the kernel menu \texttt{p} command.
+
+\section{Modified Files}
+
+\begin{itemize}
+  \item \texttt{kern/include/proc.h}: adds process PID and helper declarations.
+  \item \texttt{kern/proc/proc.c}: implements PID table, exit recording, waiting, and file table cleanup/copying.
+  \item \texttt{kern/syscall/proc\_syscalls.c}: implements process syscalls.
+  \item \texttt{kern/syscall/file\_syscalls.c}: implements \texttt{open}, \texttt{read}, \texttt{write}, \texttt{close}, and \texttt{remove}.
+  \item \texttt{kern/arch/mips/syscall/syscall.c}: dispatches new syscalls and enters forked child processes.
+  \item \texttt{kern/syscall/runprogram.c}: supports argument passing for the first process.
+  \item \texttt{kern/startup/menu.c}: forwards menu arguments to \texttt{runprogram\_args}.
+  \item \texttt{kern/thread/synch.c} and \texttt{kern/include/synch.h}: lock and CV implementation.
+\end{itemize}
+
+\section{Synchronization}
+
+Locks are implemented using a wait channel, a spinlock, a held flag, and an owner pointer. If a thread tries to acquire an already-held lock, it sleeps on the lock wait channel. When the owner releases the lock, one sleeping thread is woken.
+
+Condition variables use a wait channel. \texttt{cv\_wait} releases the associated lock while sleeping and reacquires it before returning. This follows the normal monitor-style condition variable pattern.
+
+\section{PID Table and waitpid}
+
+The kernel maintains a PID table in \texttt{proc.c}. Each entry records the PID, parent PID, exit state, encoded exit status, a lock, and a condition variable. A process can wait only for its direct children. This matches the assignment requirement that a process is interested in its children but not unrelated processes.
+
+When a child exits, \texttt{sys\_\_exit} calls \texttt{proc\_record\_exit}. The exit code is encoded with \texttt{\_MKWAIT\_EXIT}. If the parent is waiting, it is woken through the condition variable.
+
+\section{fork}
+
+\texttt{sys\_fork} copies the parent trapframe and address space, creates a child process, and starts a child kernel thread. The child thread begins in \texttt{enter\_forked\_process}. The child trapframe is modified so that:
+
+\begin{itemize}
+  \item \texttt{tf\_v0 = 0}, so the child sees \texttt{fork()} return 0.
+  \item \texttt{tf\_a3 = 0}, so the syscall result is successful.
+  \item \texttt{tf\_epc += 4}, so the syscall instruction is not repeated.
+\end{itemize}
+
+The parent receives the child PID as the return value.
+
+\section{Basic File System Calls}
+
+Each process has a file descriptor table stored in \texttt{struct proc}. Each descriptor points to a refcounted \texttt{struct filehandle}. A file handle stores the vnode, current offset, open flags, reference count, and a lock.
+
+\texttt{open} copies the filename from user space, validates the flags, calls \texttt{vfs\_open}, creates a file handle, and returns the lowest free descriptor. File creation is supported through \texttt{O\_CREAT}, which is passed to the VFS layer.
+
+\texttt{read} checks that the descriptor is valid and readable, creates a user-space \texttt{uio}, calls \texttt{VOP\_READ}, and updates the file offset from the resulting \texttt{uio\_offset}.
+
+\texttt{write} checks that the descriptor is valid and writable, creates a user-space \texttt{uio}, calls \texttt{VOP\_WRITE}, and updates the file offset. If the file was opened with \texttt{O\_APPEND}, \texttt{write} first calls \texttt{VOP\_STAT} and moves the offset to \texttt{st\_size}, so every write appends to the current end of file.
+
+\texttt{close} removes the descriptor from the process table and decrements the file handle reference count. When the count reaches zero, the vnode is closed using \texttt{vfs\_close}.
+
+\texttt{remove} copies a pathname from user space and calls \texttt{vfs\_remove}. This is required by \texttt{filetest}, which removes its temporary file at the end.
+
+During \texttt{fork}, the child's file table points to the same file handles as the parent and increments their reference counts. This means parent and child share file offsets.
+
+\section{execv}
+
+\texttt{execv} replaces the current address space with a new program image. The implementation first copies the program path and all argument strings from the old user address space. This is necessary because the original argument pointers become invalid after the old address space is replaced.
+
+After copying arguments, the kernel opens the executable, creates a new address space, loads the ELF file, defines a new stack, and copies the argument strings plus the \texttt{argv} pointer array onto the stack. Finally, \texttt{enter\_new\_process} starts the new program with the correct \texttt{argc} and \texttt{argv}.
+
+\section{Argument Passing}
+
+Arguments are placed near the top of the user stack. The strings are copied first, then an array of user-space pointers is copied below them. The final pointer is \texttt{NULL}, so user programs see a standard C-style \texttt{argv}.
+
+\section{Build and Test Commands}
+
+\begin{lstlisting}[language=bash]
+cd /root/cs350-os161/os161-1.99
+./configure --ostree=/root/cs350-os161/root --toolprefix=cs350-
+cd kern/conf
+./config ASST2
+cd ../compile/ASST2
+bmake depend
+bmake
+bmake install
+cd /root/cs350-os161/os161-1.99
+bmake
+bmake install
+\end{lstlisting}
+
+Lock test:
+
+\begin{lstlisting}[language=bash]
+cd /root/cs350-os161/root
+sys161 kernel "sy2;q"
+\end{lstlisting}
+
+Condition variable test:
+
+\begin{lstlisting}[language=bash]
+sys161 kernel "sy3;q"
+\end{lstlisting}
+
+User program and argument passing tests:
+
+\begin{lstlisting}[language=bash]
+sys161 kernel "p /testbin/palin;q"
+sys161 kernel "p /testbin/argtest hello os161;q"
+sys161 kernel
+# then inside OS/161:
+mount sfs lhd0
+p /testbin/filetest lhd0:testfile
+\end{lstlisting}
+
+\section{Screenshots}
+
+The screenshots below were captured from the OS/161 menu in the left tmux pane after building and running the ASST2 kernel. Each screenshot focuses on the final proof line of a test.
+
+\begin{itemize}
+  \item \texttt{sy2}: proves lock synchronization by completing the lock test.
+  \item \texttt{sy3}: proves condition variable sleep/wakeup behavior by completing the CV test.
+  \item \texttt{palin}: proves user programs run and can write to the console.
+  \item \texttt{argtest}: proves \texttt{argc/argv} argument passing.
+  \item \texttt{filetest}: proves file creation, write, close, reopen, read, compare, and remove on SFS.
+\end{itemize}
+
+\screenshotfig{screenshots/asst2-02-sy2-lock.png}{Lock test using sy2}
+\screenshotfig{screenshots/asst2-03-sy3-cv.png}{Condition variable test using sy3}
+\screenshotfig{screenshots/asst2-04-palin.png}{Running a user program}
+\screenshotfig{screenshots/asst2-05-argtest.png}{Argument passing test}
+\screenshotfig{screenshots/asst2-06-filetest.png}{Basic file system call test}
+
+\section{Conclusion}
+
+The ASST2 implementation adds process identity, parent-child waiting, process creation, program replacement, and argument passing. The design keeps process status in kernel bookkeeping so a parent can collect a child's exit status even after the child has stopped running.
+
+\end{document}

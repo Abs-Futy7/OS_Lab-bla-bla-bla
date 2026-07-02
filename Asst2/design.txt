@@ -1,0 +1,51 @@
+OS/161 Assignment 2 Design Notes
+
+Implemented features:
+
+1. Locks and condition variables
+   - Existing ASST1 lock/CV implementation is included through ASST2 config.
+   - Locks use a wait channel, spinlock, held flag, and owner pointer.
+   - CVs release the caller's lock while sleeping and reacquire it after wakeup.
+
+2. PID management
+   - Each user process receives a positive PID.
+   - A PID table records parent PID, exit status, and exit state.
+   - Parent-child ownership is used to enforce waitpid restrictions.
+
+3. waitpid/exit
+   - _exit records an encoded wait status using _MKWAIT_EXIT.
+   - waitpid blocks on a condition variable until the child exits.
+   - Only the parent can collect the child's status.
+
+4. fork
+   - Copies address space using as_copy.
+   - Copies trapframe.
+   - Creates a child process and thread.
+   - Child enters user mode through enter_forked_process.
+
+5. execv and argument passing
+   - Copies program path and argv strings out of old user space first.
+   - Loads the new executable into a new address space.
+   - Places strings and argv array on the new user stack.
+   - Calls enter_new_process with argc and argv.
+
+6. runprogram arguments
+   - The menu p command now passes command-line arguments to the first process.
+
+7. Basic file system calls
+   - Each process owns a file descriptor table.
+   - Each descriptor points to a refcounted filehandle.
+   - A filehandle stores vnode, offset, flags, refcount, and a lock.
+   - open supports normal VFS flags including O_CREAT, O_TRUNC, and O_APPEND.
+   - read/write use UIO_USERSPACE buffers and update the shared file offset.
+   - O_APPEND writes first move the offset to the current file size using VOP_STAT.
+   - close decrements the filehandle refcount and closes the vnode at zero.
+   - remove copies a pathname from user space and calls vfs_remove.
+   - fork shares filehandles between parent and child.
+
+Known limits:
+
+- Maximum argument count is 64.
+- Maximum single copied argument length is 1024 bytes in execv.
+- waitpid supports direct child PIDs only, as required by the assignment.
+- Implemented file calls are open/read/write/close/remove. Other calls such as dup2 and lseek are not included in this basic file layer.
