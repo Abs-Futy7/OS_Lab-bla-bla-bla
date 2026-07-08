@@ -125,16 +125,4 @@ p /testbin/filetest lhd0:testfile
 \subsection{File System Calls}
 \shot{screenshots/asst2-06-filetest.png}{File Syscall Output}{The filesystem is mounted using \texttt{mount sfs lhd0}, then \texttt{filetest} runs on \texttt{lhd0:testfile}. The message \texttt{Passed filetest.} means create/open, read, write, close, append behavior, and remove are functioning for the tested case.}
 
-\section{Short Viva Notes}
-
-\begin{itemize}
-  \item \texttt{fork}: parent gets child PID, child gets 0.
-  \item \texttt{waitpid}: only parent can wait for child status.
-  \item \texttt{execv}: replaces address space but keeps same PID.
-  \item File descriptors point to refcounted file handles.
-  \item Parent and child share file handles after \texttt{fork}, so offsets are shared.
-  \item \texttt{O\_APPEND}: write first sets offset to current file size.
-  \item Argument passing: strings and \texttt{argv[]} are copied to the new user stack.
-\end{itemize}
-
 \end{document}

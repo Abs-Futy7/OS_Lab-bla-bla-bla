@@ -24,7 +24,7 @@ Also submit:
 
 | File/Folder | Purpose |
 |---|---|
-| `Assignment2_Report.pdf` | Final report with explanations and screenshots. |
+| `47_Assignment2_Report.pdf` | Final report with explanations and screenshots. |
 | `screenshots/` | Output and code screenshots used in the report. |
 | `README.md` | Build guide, test commands, implementation notes, and viva Q&A. |
 
