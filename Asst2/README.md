@@ -2,6 +2,32 @@
 
 This folder contains the Assignment 2 implementation notes, source files, report source, and screenshot guide.
 
+## What to Submit
+
+The safest option is to submit the whole `Asst2` folder because it contains the report, screenshots, and source tree together. If sir asks only for changed code files, submit these files:
+
+| File | Why it is needed |
+|---|---|
+| `source/os161-1.99/kern/thread/synch.c` | Implements locks and condition variables used by ASST2 tests. |
+| `source/os161-1.99/kern/include/proc.h` | Adds PID fields, wait helpers, and per-process file table data. |
+| `source/os161-1.99/kern/proc/proc.c` | Implements PID table logic, process creation/exit handling, wait support, and file table copy/cleanup. |
+| `source/os161-1.99/kern/include/syscall.h` | Declares the new syscall handler functions. |
+| `source/os161-1.99/kern/arch/mips/syscall/syscall.c` | Dispatches syscall numbers to the implemented syscall functions. |
+| `source/os161-1.99/kern/syscall/proc_syscalls.c` | Implements process syscalls: `_exit`, `getpid`, `waitpid`, `fork`, and `execv`. |
+| `source/os161-1.99/kern/syscall/file_syscalls.c` | Implements file syscalls: `open`, `read`, `write`, `close`, `remove`, create, and append. |
+| `source/os161-1.99/kern/syscall/runprogram.c` | Implements argument passing for the first user program launched from the menu. |
+| `source/os161-1.99/kern/startup/menu.c` | Passes menu command arguments into `runprogram_args`. |
+| `source/os161-1.99/kern/include/test.h` | Declares `runprogram_args` for the menu code. |
+| `source/os161-1.99/kern/conf/conf.kern` | Needed if new syscall source files were added to the kernel build. |
+
+Also submit:
+
+| File/Folder | Purpose |
+|---|---|
+| `Assignment2_Report.pdf` | Final report with explanations and screenshots. |
+| `screenshots/` | Output and code screenshots used in the report. |
+| `README.md` | Build guide, test commands, implementation notes, and viva Q&A. |
+
 ## Assignment Summary
 
 Assignment 2 asks for:
@@ -17,15 +43,17 @@ The locks and condition variables are already implemented in `kern/thread/synch.
 
 | File | Purpose |
 |---|---|
-| `kern/include/proc.h` | Adds `p_pid` to each process and declares PID/wait helper functions. |
-| `kern/proc/proc.c` | Adds PID table, parent-child tracking, exit status storage, wait support, and file table cleanup/copying. |
+| `kern/thread/synch.c` | Implements lock and CV behavior: create, acquire, release, wait, signal, and broadcast. |
+| `kern/include/proc.h` | Adds process PID information and file descriptor table definitions. |
+| `kern/proc/proc.c` | Handles PID allocation, process exit/wait state, and file table setup/copy/cleanup. |
 | `kern/syscall/proc_syscalls.c` | Implements `_exit`, `getpid`, `waitpid`, `fork`, and `execv`. |
-| `kern/syscall/file_syscalls.c` | Implements `open`, `read`, `write`, `close`, `remove`, create, and append behavior. |
-| `kern/arch/mips/syscall/syscall.c` | Dispatches `fork` and `execv`, and implements `enter_forked_process`. |
+| `kern/syscall/file_syscalls.c` | Implements `open`, `read`, `write`, `close`, `remove`, `O_CREAT`, and `O_APPEND`. |
+| `kern/arch/mips/syscall/syscall.c` | Dispatches syscall numbers and returns syscall results to user mode. |
 | `kern/syscall/runprogram.c` | Adds argument passing for the first process started by the menu. |
 | `kern/startup/menu.c` | Sends menu arguments to `runprogram_args` for ASST2. |
-| `kern/include/syscall.h` | Adds kernel prototypes for new syscall handlers. |
+| `kern/include/syscall.h` | Adds kernel prototypes for syscall handlers. |
 | `kern/include/test.h` | Adds the `runprogram_args` prototype. |
+| `kern/conf/conf.kern` | Includes new source files in the ASST2 kernel build. |
 
 ## How the Code Works
 
