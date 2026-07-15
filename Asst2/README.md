@@ -256,6 +256,231 @@ The report uses screenshots from `Asst2/screenshots/` with these names:
 
 The screenshots were found by running each OS/161 menu command in the left pane of the tmux session created by `build-and-run-kernel.sh`. The proof line at the end of each output is what matters for the report.
 
+### Screenshot-to-code explanation
+
+Use this part in viva when sir asks: "This output is showing success, but which code made it work?"
+
+#### `sy2` lock test screenshot
+
+Command:
+
+```text
+sy2
+```
+
+Important output:
+
+```text
+Lock test done.
+```
+
+What happens internally:
+
+1. The OS/161 synchronization test starts many kernel threads.
+2. Those threads repeatedly enter critical sections protected by locks.
+3. If `lock_acquire` does not sleep correctly, multiple threads can enter the critical section together.
+4. If `lock_release` does not wake waiters correctly, the test can hang.
+5. The line `Lock test done.` means the lock test completed without deadlock or shared-state corruption.
+
+Code locations:
+
+| Code | File and line | What it does |
+|---|---|---|
+| `lock_create` | `source/os161-1.99/kern/thread/synch.c:151` | Allocates the lock, creates its wait channel, initializes the spinlock, and marks the lock as free. |
+| `lock_acquire` | `source/os161-1.99/kern/thread/synch.c:193` | If the lock is busy, the current thread sleeps on the wait channel until another thread releases it. |
+| `lock_release` | `source/os161-1.99/kern/thread/synch.c:212` | Clears the owner/held state and wakes one sleeping thread. |
+
+Short viva answer:
+
+> `sy2` proves my lock code works. The test creates multiple threads. Internally, `lock_acquire` protects the critical section by sleeping when the lock is already held, and `lock_release` wakes a waiting thread. Since the output reaches `Lock test done`, the test did not deadlock and the lock state stayed consistent.
+
+#### `sy3` condition variable screenshot
+
+Command:
+
+```text
+sy3
+```
+
+Important output:
+
+```text
+CV test done
+```
+
+What happens internally:
+
+1. The CV test creates 32 threads.
+2. Threads wait until the correct ordering condition becomes true.
+3. Waiting threads call `cv_wait`, which releases the lock before sleeping.
+4. Other threads call `cv_signal` or `cv_broadcast` to wake waiters.
+5. When the output finishes in the expected order and prints `CV test done`, it proves sleeping, waking, and lock reacquisition worked.
+
+Code locations:
+
+| Code | File and line | What it does |
+|---|---|---|
+| `cv_wait` | `source/os161-1.99/kern/thread/synch.c:280` | Releases the caller's lock, sleeps on the CV wait channel, then reacquires the lock after wakeup. |
+| `cv_signal` | `source/os161-1.99/kern/thread/synch.c:294` | Wakes one thread waiting on the condition variable. |
+| `cv_broadcast` | `source/os161-1.99/kern/thread/synch.c:304` | Wakes all threads waiting on the condition variable. |
+
+Short viva answer:
+
+> `sy3` proves condition variables work. `cv_wait` temporarily releases the lock before sleeping, so other threads can change the condition. After `cv_signal` or `cv_broadcast`, the waiting thread wakes and reacquires the lock before continuing.
+
+#### `argtest` argument passing screenshot
+
+Command:
+
+```text
+p /testbin/argtest hello os161
+```
+
+Important output:
+
+```text
+argc: 3
+arg[0]: /testbin/argtest
+arg[1]: hello
+arg[2]: os161
+arg[3]: [NULL]
+```
+
+What happens internally:
+
+1. The OS/161 menu receives the `p` command and the extra words after it.
+2. `menu.c` passes those words to `runprogram_args`.
+3. `runprogram_args` loads the executable and creates a new user address space.
+4. The kernel copies each argument string onto the new user stack using safe copy functions.
+5. It builds the user `argv[]` pointer array and calls `enter_new_process`.
+6. `argtest` prints the arguments it received, so the screenshot proves the stack layout is correct.
+
+Code locations:
+
+| Code | File and line | What it does |
+|---|---|---|
+| `cmd_progthread` | `source/os161-1.99/kern/startup/menu.c:89` | Starts the program thread for the `p` menu command. |
+| `runprogram_args` call | `source/os161-1.99/kern/startup/menu.c:110` | Passes menu arguments to the ASST2 argument-aware program loader. |
+| `runprogram_args` | `source/os161-1.99/kern/syscall/runprogram.c:99` | Loads the program and prepares `argc/argv` for user mode. |
+| `copyoutstr` | `source/os161-1.99/kern/syscall/runprogram.c:78` | Copies each argument string to the new user stack. |
+| `copyout` | `source/os161-1.99/kern/syscall/runprogram.c:87` | Copies the `argv[]` pointer array to user space. |
+| `enter_new_process` | `source/os161-1.99/kern/syscall/runprogram.c:143` | Enters user mode with `argc`, `argv`, stack pointer, and entrypoint. |
+
+Short viva answer:
+
+> This screenshot proves argument passing. The menu sends all words after `p` into `runprogram_args`. That function copies strings and the `argv` array to the new user stack. `argtest` prints the same values, so `argc/argv` were passed correctly.
+
+#### `palin` user program screenshot
+
+Command:
+
+```text
+p /testbin/palin
+```
+
+Important output:
+
+```text
+IS a palindrome
+```
+
+What happens internally:
+
+1. The kernel menu starts a user program using `runprogram_args`.
+2. The executable is loaded into a new address space.
+3. The program runs in user mode and prints to the console.
+4. Console output reaches the kernel through the `write` syscall.
+5. The program exits through `_exit`.
+
+Code locations:
+
+| Code | File and line | What it does |
+|---|---|---|
+| `runprogram_args` | `source/os161-1.99/kern/syscall/runprogram.c:99` | Loads the executable and enters user mode. |
+| syscall dispatch for `write` | `source/os161-1.99/kern/arch/mips/syscall/syscall.c:122` | Routes user `write` syscall to `sys_write`. |
+| `sys_write` | `source/os161-1.99/kern/syscall/file_syscalls.c:232` | Writes user buffer contents to a file descriptor or console. |
+| syscall dispatch for `_exit` | `source/os161-1.99/kern/arch/mips/syscall/syscall.c:148` | Routes program termination to `sys__exit`. |
+| `sys__exit` | `source/os161-1.99/kern/syscall/proc_syscalls.c:123` | Records exit status and terminates the current thread/process. |
+
+Short viva answer:
+
+> `palin` proves a normal user program can be loaded, run, print output, and exit. The visible text comes through the `write` syscall, and process termination goes through `_exit`.
+
+#### `filetest` file syscall screenshot
+
+Commands:
+
+```text
+mount sfs lhd0
+p /testbin/filetest lhd0:testfile
+```
+
+Important output:
+
+```text
+Passed filetest.
+```
+
+What happens internally:
+
+1. `mount sfs lhd0` mounts the SFS disk so the test can create and remove files.
+2. `filetest` opens/creates `lhd0:testfile`.
+3. It writes data, closes the file, reopens it, reads the data, compares contents, and removes the file.
+4. If any syscall fails, `filetest` prints an error instead of `Passed filetest.`
+5. The final success line proves the implemented file syscalls work together on SFS.
+
+Code locations:
+
+| Code | File and line | What it does |
+|---|---|---|
+| file handle struct | `source/os161-1.99/kern/include/proc.h:49` | Stores vnode, offset, flags, refcount, and lock for an open file. |
+| process file table | `source/os161-1.99/kern/include/proc.h:88` | Stores each process's file descriptors. |
+| syscall prototypes | `source/os161-1.99/kern/include/syscall.h:63` | Declares file syscall functions for the dispatcher. |
+| `sys_open` | `source/os161-1.99/kern/syscall/file_syscalls.c:95` | Copies filename from user space, calls `vfs_open`, creates a file handle, and returns a descriptor. |
+| `vfs_open` call | `source/os161-1.99/kern/syscall/file_syscalls.c:125` | Actually opens or creates the file in the VFS layer. |
+| `sys_close` | `source/os161-1.99/kern/syscall/file_syscalls.c:153` | Removes the descriptor and releases the file handle reference. |
+| `sys_remove` | `source/os161-1.99/kern/syscall/file_syscalls.c:168` | Deletes the pathname from the mounted filesystem. |
+| `vfs_remove` call | `source/os161-1.99/kern/syscall/file_syscalls.c:188` | Performs the actual VFS remove operation. |
+| `sys_read` | `source/os161-1.99/kern/syscall/file_syscalls.c:194` | Builds a user `uio`, calls `VOP_READ`, and updates the file offset. |
+| `VOP_READ` call | `source/os161-1.99/kern/syscall/file_syscalls.c:221` | Reads bytes from the vnode into the user buffer. |
+| `sys_write` | `source/os161-1.99/kern/syscall/file_syscalls.c:232` | Builds a user `uio`, calls `VOP_WRITE`, and updates the file offset. |
+| `O_APPEND` handling | `source/os161-1.99/kern/syscall/file_syscalls.c:250` | Moves the offset to the end of the file before writing when append mode is used. |
+| `VOP_WRITE` call | `source/os161-1.99/kern/syscall/file_syscalls.c:269` | Writes user bytes into the vnode. |
+| syscall dispatch | `source/os161-1.99/kern/arch/mips/syscall/syscall.c:122` | Dispatches file syscall numbers such as `write`, `open`, `close`, `read`, and `remove`. |
+| build inclusion | `source/os161-1.99/kern/conf/conf.kern:380` | Includes `file_syscalls.c` in the kernel build. |
+
+Short viva answer:
+
+> `filetest` proves the file syscall path. User program syscalls enter `syscall.c`, dispatch into `file_syscalls.c`, operate on the process file table and vnode, then return results to user mode. `Passed filetest` means create/open, write, close, reopen, read, compare, and remove all worked.
+
+#### `cat` or similar extra file test
+
+Example command:
+
+```text
+p /bin/cat lhd0:testfile
+```
+
+What it tests:
+
+- `open` opens the file.
+- `read` reads file bytes into a user buffer.
+- `write` prints those bytes to the console.
+- `close` releases the descriptor.
+
+Related code:
+
+| Code | File and line | What it does |
+|---|---|---|
+| `sys_open` | `source/os161-1.99/kern/syscall/file_syscalls.c:95` | Opens the file and returns a descriptor. |
+| `sys_read` | `source/os161-1.99/kern/syscall/file_syscalls.c:194` | Reads file contents from the vnode. |
+| `sys_write` | `source/os161-1.99/kern/syscall/file_syscalls.c:232` | Prints data to stdout/console. |
+| `sys_close` | `source/os161-1.99/kern/syscall/file_syscalls.c:153` | Closes the descriptor. |
+
+Short viva answer:
+
+> `cat` is a simple file syscall test. It opens a file, repeatedly reads from it, writes the bytes to stdout, and closes the file. So if `cat` prints file contents, my `open/read/write/close` path is working.
+
 ## Viva Q&A
 
 **Q: Why do we need PIDs?**  
