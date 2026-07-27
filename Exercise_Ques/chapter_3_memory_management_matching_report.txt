@@ -1,0 +1,89 @@
+Chapter 3 exercise matching report
+==================================
+
+Textbook source section: Chapter 3 MEMORY MANAGEMENT PROBLEMS, beginning with Exercise 1 and ending before Chapter 4.
+Answer source section: SOLUTIONS TO CHAPTER 3 PROBLEMS, ending before SOLUTIONS TO CHAPTER 4 PROBLEMS.
+
+Total questions found: 55
+Total answers found in Chapter 3 answer section: 49
+Total answer-manual answers matched confidently: 49
+Total prepared answers added for missing manual answers: 6
+Questions without an answer in the final PDF: none
+Questions not matched in the answer manual: 50, 51, 52, 53, 54, 55
+Duplicate question numbers: none
+Duplicate answer numbers: none
+Question numbering inconsistencies: none
+Answer numbering inconsistencies: none
+Uncertain matches: none
+
+Per-exercise mapping
+--------------------
+Exercise 1: question page 255; answer page 15; matched by Chapter 3 section order and content evidence [every, reference]. Source: Answer manual.
+Exercise 2: question page 255; answer page 15; matched by Chapter 3 section order and content evidence [base, limit, accident]. Source: Answer manual.
+Exercise 3: question page 255; answer page 15; matched by Chapter 3 section order and content evidence [holes, many, data, segments, read, word, nsec, about]. Source: Answer manual.
+Exercise 4: question page 255; answer page 15; matched by Chapter 3 section order and content evidence [first, best, worst, next]. Source: Answer manual.
+Exercise 5: question page 255; answer page 15; matched by Chapter 3 section order and content evidence [physical, address, virtual]. Source: Answer manual.
+Exercise 6: question page 255; answer page 15; matched by Chapter 3 section order and content evidence [offset]. Source: Answer manual.
+Exercise 7: question page 255; answer page 15; matched by Chapter 3 section order and content evidence [4100]. Source: Answer manual.
+Exercise 8: question page 255; answer page 15; matched by Chapter 3 section order and content evidence [8086, virtual]. Source: Answer manual.
+Exercise 9: question page 285; answer page 15; matched by Chapter 3 section order and content evidence [virtual]. Source: Answer manual.
+Exercise 10: question page 285; answer page 16; matched by Chapter 3 section order and content evidence [copy, write, server, sense, smartphone]. Source: Answer manual.
+Exercise 11: question page 285; answer page 16; matched by Chapter 3 section order and content evidence [miss, every, many, times]. Source: Answer manual.
+Exercise 12: question page 285; answer page 16; matched by Chapter 3 section order and content evidence [amount, disk, space, storage, maximum, processes, virtual, address]. Source: Answer manual.
+Exercise 13: question page 285; answer page 16; matched by Chapter 3 section order and content evidence [instruction, takes, nsec, fault, every, instructions]. Source: Answer manual.
+Exercise 14: question page 285; answer page 16; matched by Chapter 3 section order and content evidence [process, msec, time, loading, tables]. Source: Answer manual.
+Exercise 15: question page 285; answer page 16; matched by Chapter 3 section order and content evidence [addresses, entries, program, contains, long]. Source: Answer manual.
+Exercise 16: question page 285; answer page 16; matched by Chapter 3 section order and content evidence [nsec, time, references, fault, effective, address, translation]. Source: Answer manual.
+Exercise 17: question page 285; answer page 17; matched by Chapter 3 section order and content evidence [multilevel, entries, bits, field]. Source: Answer manual.
+Exercise 18: question page 286; answer page 17; matched by Chapter 3 section order and content evidence [bits, still, address]. Source: Answer manual.
+Exercise 19: question page 286; answer page 17; matched by Chapter 3 section order and content evidence [virtual, offset]. Source: Answer manual.
+Exercise 20: question page 286; answer page 17; matched by Chapter 3 section order and content evidence [entries, needed, level, paging, used]. Source: Answer manual.
+Exercise 21: question page 286; answer page 17; matched by Chapter 3 section order and content evidence [reference, string, instruction, data, load, 6144, push, call]. Source: Answer manual.
+Exercise 22: question page 286; answer page 17; matched by Chapter 3 section order and content evidence [rate]. Source: Answer manual.
+Exercise 23: question page 286; answer page 17; matched by Chapter 3 section order and content evidence [associative, device, needed, design]. Source: Answer manual.
+Exercise 24: question page 286; answer page 18; matched by Chapter 3 section order and content evidence [virtual]. Source: Answer manual.
+Exercise 25: question page 286; answer page 18; matched by Chapter 3 section order and content evidence [main, hash, mean, chain, length, size]. Source: Answer manual.
+Exercise 26: question page 286; answer page 18; matched by Chapter 3 section order and content evidence [compiler, course, used, possible, time]. Source: Answer manual.
+Exercise 27: question page 286; answer page 18; matched by Chapter 3 section order and content evidence [reference, sequence, length, frames]. Source: Answer manual.
+Exercise 28: question page 287; answer page 18; matched by Chapter 3 section order and content evidence [fifo, frames, faults]. Source: Answer manual.
+Exercise 29: question page 287; answer page 18; matched by Chapter 3 section order and content evidence [official sequential answer section]. Source: Answer manual.
+Exercise 30: question page 287; answer page 18; matched by Chapter 3 section order and content evidence [counters]. Source: Answer manual.
+Exercise 31: question page 287; answer page 19; matched by Chapter 3 section order and content evidence [sequence, clock]. Source: Answer manual.
+Exercise 32: question page 287; answer page 19; matched by Chapter 3 section order and content evidence [removed, 1000]. Source: Answer manual.
+Exercise 33: question page 287; answer page 19; matched by Chapter 3 section order and content evidence [time, stamp, bits, entries]. Source: Answer manual.
+Exercise 34: question page 287; answer page 19; matched by Chapter 3 section order and content evidence [replacement, fifo, optimal, attribute, algorithm]. Source: Answer manual.
+Exercise 35: question page 288; answer page 19; matched by Chapter 3 section order and content evidence [take, disk, seek, time, msec, number]. Source: Answer manual.
+Exercise 36: question page 288; answer page 20; matched by Chapter 3 section order and content evidence [fifo, second, chance]. Source: Answer manual.
+Exercise 37: question page 288; answer page 20; matched by Chapter 3 section order and content evidence [process, faults, shared, update, delayed, handling, fault, cost]. Source: Answer manual.
+Exercise 38: question page 288; answer page 20; matched by Chapter 3 section order and content evidence [array, frames, frame, words, occupies, other, code, number]. Source: Answer manual.
+Exercise 39: question page 289; answer page 20; matched by Chapter 3 section order and content evidence [worthwhile, server, disk, done, approach]. Source: Answer manual.
+Exercise 40: question page 289; answer page 20; matched by Chapter 3 section order and content evidence [time, written, paging, drum]. Source: Answer manual.
+Exercise 41: question page 289; answer page 20; matched by Chapter 3 section order and content evidence [4096, program, text, size, data, stack]. Source: Answer manual.
+Exercise 42: question page 289; answer page 21; matched by Chapter 3 section order and content evidence [faults, program, fault, msec, time, twice, much]. Source: Answer manual.
+Exercise 43: question page 289; answer page 21; matched by Chapter 3 section order and content evidence [program, area, binary, file, data]. Source: Answer manual.
+Exercise 44: question page 289; answer page 21; matched by Chapter 3 section order and content evidence [machine, instruction, load, word, address, faults, cause]. Source: Answer manual.
+Exercise 45: question page 289; answer page 21; matched by Chapter 3 section order and content evidence [between, internal, fragmentation, external, occurs, paging, pure, segmentation]. Source: Answer manual.
+Exercise 46: question page 289; answer page 21; matched by Chapter 3 section order and content evidence [both, segment]. Source: Answer manual.
+Exercise 47: question page 289; answer page 21; matched by Chapter 3 section order and content evidence [segment, read, write, execute, protection, address, results, fault]. Source: Answer manual.
+Exercise 48: question page 290; answer page 21; matched by Chapter 3 section order and content evidence [situations, virtual, support]. Source: Answer manual.
+Exercise 49: question page 290; answer page 22; matched by Chapter 3 section order and content evidence [virtual, another, operating]. Source: Answer manual.
+Exercise 50: question page 290; no answer found in Chapter 3 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 51: question page 290; no answer found in Chapter 3 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 52: question page 290; no answer found in Chapter 3 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 53: question page 291; no answer found in Chapter 3 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 54: question page 291; no answer found in Chapter 3 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 55: question page 291; no answer found in Chapter 3 answer section; prepared answer included. Source: Independently prepared technical answer.
+
+Boundary verification
+---------------------
+First question: Exercise 1: The IBM 360 had a scheme of locking 2-KB blocks by assigning each one a 4-bit key and having the CPU compare the key on ...
+Last question: Exercise 55: Write a program that can be used to compare the effectiveness of adding a tag field to TLB entries when control is toggl...
+First answer: Answer 1: First, special hardware is needed to do the comparisons, and it must be fast, since it is used on every memory reference...
+Last answer in Chapter 3 answer section: Answer 49: This question addresses one aspect of virtual machine support. Recent attempts include Denali, Xen, and VMware. The fund...
+
+Notes
+-----
+The provided answer PDF contains numbered Chapter 3 answers only through Exercise 49.
+Exercises 50 through 55 are included from the textbook and answered with clearly labeled prepared technical answers.
+No practical experiment was claimed to have been executed.
+PDF extraction repairs were limited to removing page headers/footers, joining words split by line-end hyphenation, and restoring small obvious math formatting artifacts.

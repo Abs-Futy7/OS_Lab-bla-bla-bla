@@ -1,0 +1,99 @@
+Chapter 2 exercise matching report
+==================================
+
+Textbook source section: Chapter 2 PROCESSES AND THREADS PROBLEMS, beginning with Exercise 1 and ending before Chapter 3.
+Answer source section: SOLUTIONS TO CHAPTER 2 PROBLEMS, ending before SOLUTIONS TO CHAPTER 3 PROBLEMS.
+
+Total questions found: 65
+Total answers found in Chapter 2 answer section: 57
+Total answer-manual answers matched confidently: 57
+Total prepared answers added for missing manual answers: 8
+Questions without an answer in the final PDF: none
+Questions not matched in the answer manual: 58, 59, 60, 61, 62, 63, 64, 65
+Duplicate question numbers: none
+Duplicate answer numbers: none
+Question numbering inconsistencies: none
+Answer numbering inconsistencies: none
+Uncertain matches: none
+
+Per-exercise mapping
+--------------------
+Exercise 1: question page 204; answer page 7; matched by Chapter 2 section order and content evidence [missing, might]. Source: Answer manual.
+Exercise 2: question page 204; answer page 7; matched by Chapter 2 section order and content evidence [official sequential answer section]. Source: Answer manual.
+Exercise 3: question page 204; answer page 7; matched by Chapter 2 section order and content evidence [interrupt]. Source: Answer manual.
+Exercise 4: question page 204; answer page 7; matched by Chapter 2 section order and content evidence [call, operating, kernel, stack, separate]. Source: Answer manual.
+Exercise 5: question page 204; answer page 7; matched by Chapter 2 section order and content evidence [five, idle, time]. Source: Answer manual.
+Exercise 6: question page 204; answer page 7; matched by Chapter 2 section order and content evidence [wait]. Source: Answer manual.
+Exercise 7: question page 204; answer page 7; matched by Chapter 2 section order and content evidence [jobs, parallel, finish, sequentially, minutes, time, take, complete]. Source: Answer manual.
+Exercise 8: question page 204; answer page 7; matched by Chapter 2 section order and content evidence [waiting, utilization]. Source: Answer manual.
+Exercise 9: question page 204; answer page 8; matched by Chapter 2 section order and content evidence [large, file, mirror, servers]. Source: Answer manual.
+Exercise 10: question page 204; answer page 8; matched by Chapter 2 section order and content evidence [file, server, cache, memory]. Source: Answer manual.
+Exercise 11: question page 204; answer page 8; matched by Chapter 2 section order and content evidence [keyboard, single, threaded]. Source: Answer manual.
+Exercise 12: question page 204; answer page 8; matched by Chapter 2 section order and content evidence [read, user, level, kernel, used]. Source: Answer manual.
+Exercise 13: question page 204; answer page 8; matched by Chapter 2 section order and content evidence [server, example]. Source: Answer manual.
+Exercise 14: question page 205; answer page 8; matched by Chapter 2 section order and content evidence [register, registers]. Source: Answer manual.
+Exercise 15: question page 205; answer page 8; matched by Chapter 2 section order and content evidence [yield, after]. Source: Answer manual.
+Exercise 16: question page 205; answer page 8; matched by Chapter 2 section order and content evidence [preempted, clock, interrupt]. Source: Answer manual.
+Exercise 17: question page 205; answer page 9; matched by Chapter 2 section order and content evidence [single, threaded, server, multithreaded, takes, msec, request, cache]. Source: Answer manual.
+Exercise 18: question page 205; answer page 9; matched by Chapter 2 section order and content evidence [biggest, advantage, disadvantage]. Source: Answer manual.
+Exercise 19: question page 205; answer page 9; matched by Chapter 2 section order and content evidence [created]. Source: Answer manual.
+Exercise 20: question page 205; answer page 9; matched by Chapter 2 section order and content evidence [global, create, variable]. Source: Answer manual.
+Exercise 21: question page 205; answer page 9; matched by Chapter 2 section order and content evidence [time, clock, interrupt, might]. Source: Answer manual.
+Exercise 22: question page 205; answer page 9; matched by Chapter 2 section order and content evidence [call, alarm, calls, possible, package]. Source: Answer manual.
+Exercise 23: question page 205; answer page 9; matched by Chapter 2 section order and content evidence [busy, waiting]. Source: Answer manual.
+Exercise 24: question page 205; answer page 9; matched by Chapter 2 section order and content evidence [scheduling, preemptive, nonpreemptive]. Source: Answer manual.
+Exercise 25: question page 205; answer page 9; matched by Chapter 2 section order and content evidence [priority, inversion, problem, happen, user, level]. Source: Answer manual.
+Exercise 26: question page 205; answer page 10; matched by Chapter 2 section order and content evidence [priority, scheduling]. Source: Answer manual.
+Exercise 27: question page 205; answer page 10; matched by Chapter 2 section order and content evidence [stack, user, level, kernel]. Source: Answer manual.
+Exercise 28: question page 206; answer page 10; matched by Chapter 2 section order and content evidence [computer, simulated, runs, race, condition]. Source: Answer manual.
+Exercise 29: question page 206; answer page 10; matched by Chapter 2 section order and content evidence [producer, consumer, buffer, work]. Source: Answer manual.
+Exercise 30: question page 206; answer page 10; matched by Chapter 2 section order and content evidence [solution, mutual, exclusion, turn, while, critical, section]. Source: Answer manual.
+Exercise 31: question page 206; answer page 10; matched by Chapter 2 section order and content evidence [operating, interrupts]. Source: Answer manual.
+Exercise 32: question page 206; answer page 10; matched by Chapter 2 section order and content evidence [counting, semaphores, binary]. Source: Answer manual.
+Exercise 33: question page 206; answer page 11; matched by Chapter 2 section order and content evidence [sense, barrier]. Source: Answer manual.
+Exercise 34: question page 206; answer page 11; matched by Chapter 2 section order and content evidence [same, using, kernel, semaphore, user, other]. Source: Answer manual.
+Exercise 35: question page 206; answer page 11; matched by Chapter 2 section order and content evidence [monitors, signal, primitive, predicate, hoare, brinch, hansen]. Source: Answer manual.
+Exercise 36: question page 206; answer page 11; matched by Chapter 2 section order and content evidence [food, four, employees, orders, bags, unix]. Source: Answer manual.
+Exercise 37: question page 207; answer page 11; matched by Chapter 2 section order and content evidence [lead, race, conditions]. Source: Answer manual.
+Exercise 38: question page 207; answer page 11; matched by Chapter 2 section order and content evidence [official sequential answer section]. Source: Answer manual.
+Exercise 39: question page 207; answer page 11; matched by Chapter 2 section order and content evidence [exit, child, created]. Source: Answer manual.
+Exercise 40: question page 207; answer page 11; matched by Chapter 2 section order and content evidence [list, runnable]. Source: Answer manual.
+Exercise 41: question page 207; answer page 11; matched by Chapter 2 section order and content evidence [likely, bound, source, code, time]. Source: Answer manual.
+Exercise 42: question page 207; answer page 12; matched by Chapter 2 section order and content evidence [time, quantum, value, context, switching]. Source: Answer manual.
+Exercise 43: question page 207; answer page 12; matched by Chapter 2 section order and content evidence [time, switch, quantum, efficiency]. Source: Answer manual.
+Exercise 44: question page 207; answer page 12; matched by Chapter 2 section order and content evidence [minimize, average, response, time]. Source: Answer manual.
+Exercise 45: question page 207; answer page 12; matched by Chapter 2 section order and content evidence [five, jobs, through, time, times, minutes, priority, scheduling]. Source: Answer manual.
+Exercise 46: question page 208; answer page 12; matched by Chapter 2 section order and content evidence [times, must, swapped, first, time]. Source: Answer manual.
+Exercise 47: question page 208; answer page 12; matched by Chapter 2 section order and content evidence [real, time, voice, msec, call, video, schedulable]. Source: Answer manual.
+Exercise 48: question page 208; answer page 13; matched by Chapter 2 section order and content evidence [another, video, stream, schedulable]. Source: Answer manual.
+Exercise 49: question page 208; answer page 13; matched by Chapter 2 section order and content evidence [official sequential answer section]. Source: Answer manual.
+Exercise 50: question page 208; answer page 13; matched by Chapter 2 section order and content evidence [msec, schedulable]. Source: Answer manual.
+Exercise 51: question page 208; answer page 13; matched by Chapter 2 section order and content evidence [philosopher, always, fork, deadlock, free]. Source: Answer manual.
+Exercise 52: question page 208; answer page 13; matched by Chapter 2 section order and content evidence [time, needs, voice, msec, consume, burst, video, schedulable]. Source: Answer manual.
+Exercise 53: question page 208; answer page 13; matched by Chapter 2 section order and content evidence [policy, mechanism, kernel, means]. Source: Answer manual.
+Exercise 54: question page 208; answer page 13; matched by Chapter 2 section order and content evidence [state, hungry, forks]. Source: Answer manual.
+Exercise 55: question page 208; answer page 13; matched by Chapter 2 section order and content evidence [forks, after, test, change]. Source: Answer manual.
+Exercise 56: question page 208; answer page 13; matched by Chapter 2 section order and content evidence [readers, writers, started, variation, reader, writer]. Source: Answer manual.
+Exercise 57: question page 208; answer page 14; matched by Chapter 2 section order and content evidence [shell, script, file, numbers, background, foreground, before, race]. Source: Answer manual.
+Exercise 58: question page 209; no answer found in Chapter 2 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 59: question page 209; no answer found in Chapter 2 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 60: question page 209; no answer found in Chapter 2 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 61: question page 209; no answer found in Chapter 2 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 62: question page 209; no answer found in Chapter 2 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 63: question page 209; no answer found in Chapter 2 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 64: question page 209; no answer found in Chapter 2 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 65: question page 210; no answer found in Chapter 2 answer section; prepared answer included. Source: Independently prepared technical answer.
+
+Boundary verification
+---------------------
+First question: Exercise 1: In Fig. 2-2, three process states are shown. In theory, with three states, there could be six transitions, two out of ea...
+Last question: Exercise 65: Implement a program to count the frequency of words in a text file. The text file is partitioned into N segments. Each s...
+First answer: Answer 1: The transition from blocked to running is conceivable. Suppose that a process is blocked on I/O and the I/O finishes. If...
+Last answer in Chapter 2 answer section: Answer 57: A possible shell script might be if [ ! -f numbers ]; then echo 0 > numbers; fi count = 0 while (test $count != 200 ) do...
+
+Notes
+-----
+The provided answer PDF contains numbered Chapter 2 answers only through Exercise 57.
+Exercises 58 through 65 are included from the textbook and answered with clearly labeled prepared technical answers.
+No practical experiment was claimed to have been executed.
+PDF extraction repairs were limited to removing page headers/footers, joining words split by line-end hyphenation, and restoring small obvious math formatting artifacts.

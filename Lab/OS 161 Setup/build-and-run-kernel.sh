@@ -7,13 +7,13 @@ set -e # give an error if any command finishes with a non-zero exit code
 set -u # give an error if we reference unset variables
 set -o pipefail # for a pipeline, if any of the commands fail with a non-zero exit code, fail the entire pipeline with that exit code
 
-# display an error if we're not running inside a Docker container
-if ! grep docker /proc/1/cgroup -qa; then
+# display an error if we're not running inside a container
+if [[ ! -f /.dockerenv ]] && ! grep -E '(docker|containerd|kubepods)' /proc/1/cgroup -qa; then
   echo 'ERROR: PLEASE RUN THIS SCRIPT INSIDE THE INTERACTIVE CS350 SHELL (SEE `start-interactive-cs350-shell.sh`)'
   exit 1
 fi
 
-ASSIGNMENT=ASST0
+ASSIGNMENT=ASST2
 
 # copy in the SYS/161 default configuration
 mkdir --parents /root/cs350-os161/root

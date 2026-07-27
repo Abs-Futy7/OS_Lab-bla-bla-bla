@@ -1,0 +1,80 @@
+Chapter 6 exercise matching report
+==================================
+
+Textbook source section: Chapter 6 DEADLOCKS PROBLEMS, beginning with Exercise 1 and ending before Chapter 7.
+Answer source section: SOLUTIONS TO CHAPTER 6 PROBLEMS, ending before SOLUTIONS TO CHAPTER 7 PROBLEMS.
+
+Total questions found: 44
+Total answers found in Chapter 6 answer section: 38
+Total answer-manual answers matched confidently: 38
+Total prepared answers added for missing manual answers: 6
+Total added math explanations: 9
+Questions without an answer in the final PDF: none
+Questions not matched in the answer manual: 39, 40, 41, 42, 43, 44
+Duplicate question numbers: none
+Duplicate answer numbers: none
+Question numbering inconsistencies: none
+Answer numbering inconsistencies: none
+Uncertain matches: none
+
+Per-exercise mapping
+--------------------
+Exercise 1: question page 466; answer page 37; matched by Chapter 6 section order and content evidence [official sequential answer section]. Source: Answer manual.
+Exercise 2: question page 466; answer page 37; matched by Chapter 6 section order and content evidence [disk, space, print, avoided]. Source: Answer manual.
+Exercise 3: question page 466; answer page 37; matched by Chapter 6 section order and content evidence [preemptable, nonpreemptable]. Source: Answer manual.
+Exercise 4: question page 466; answer page 37; matched by Chapter 6 section order and content evidence [official sequential answer section]. Source: Answer manual.
+Exercise 5: question page 466; answer page 37; matched by Chapter 6 section order and content evidence [four, conditions, hold, these]. Source: Answer manual.
+Exercise 6: question page 466; answer page 37; matched by Chapter 6 section order and content evidence [city, streets, gridlock, cars, block, enter, intersection, traffic]. Source: Answer manual.
+Exercise 7: question page 496; answer page 38; matched by Chapter 6 section order and content evidence [cars, intersection, traffic, drive, proceed, anomaly, communication]. Source: Answer manual.
+Exercise 8: question page 496; answer page 38; matched by Chapter 6 section order and content evidence [possible, units, type, another, example]. Source: Answer manual.
+Exercise 9: question page 496; answer page 38; matched by Chapter 6 section order and content evidence [graph, illegal, graphs, exist, violate]. Source: Answer manual.
+Exercise 10: question page 496; answer page 38; matched by Chapter 6 section order and content evidence [official sequential answer section]. Source: Answer manual.
+Exercise 11: question page 496; answer page 38; matched by Chapter 6 section order and content evidence [suppose, deadlocked, circular, chain]. Source: Answer manual.
+Exercise 12: question page 496; answer page 39; matched by Chapter 6 section order and content evidence [message, some, time, window, size]. Source: Answer manual.
+Exercise 13: question page 496; answer page 39; matched by Chapter 6 section order and content evidence [administrator]. Source: Answer manual.
+Exercise 14: question page 496; answer page 39; matched by Chapter 6 section order and content evidence [deadlocked]. Source: Answer manual. Added math explanation: yes.
+Exercise 15: question page 497; answer page 39; matched by Chapter 6 section order and content evidence [recovery, through, preemption, rollback, killing]. Source: Answer manual.
+Exercise 16: question page 497; answer page 39; matched by Chapter 6 section order and content evidence [official sequential answer section]. Source: Answer manual. Added math explanation: yes.
+Exercise 17: question page 497; answer page 39; matched by Chapter 6 section order and content evidence [trajectories, diagonal]. Source: Answer manual.
+Exercise 18: question page 497; answer page 39; matched by Chapter 6 section order and content evidence [three]. Source: Answer manual.
+Exercise 19: question page 497; answer page 39; matched by Chapter 6 section order and content evidence [used, scheduling]. Source: Answer manual.
+Exercise 20: question page 497; answer page 39; matched by Chapter 6 section order and content evidence [state, neither, deadlocked, safe, example, states]. Source: Answer manual. Added math explanation: yes.
+Exercise 21: question page 497; answer page 40; matched by Chapter 6 section order and content evidence [safe, unsafe, request]. Source: Answer manual. Added math explanation: yes.
+Exercise 22: question page 497; answer page 40; matched by Chapter 6 section order and content evidence [official sequential answer section]. Source: Answer manual. Added math explanation: yes.
+Exercise 23: question page 497; answer page 40; matched by Chapter 6 section order and content evidence [condition]. Source: Answer manual. Added math explanation: yes.
+Exercise 24: question page 497; answer page 40; matched by Chapter 6 section order and content evidence [official sequential answer section]. Source: Answer manual.
+Exercise 25: question page 497; answer page 40; matched by Chapter 6 section order and content evidence [algorithm, number, operations, must]. Source: Answer manual. Added math explanation: yes.
+Exercise 26: question page 497; answer page 40; matched by Chapter 6 section order and content evidence [needs, follows, available, smallest, value]. Source: Answer manual. Added math explanation: yes.
+Exercise 27: question page 497; answer page 41; matched by Chapter 6 section order and content evidence [official sequential answer section]. Source: Answer manual.
+Exercise 28: question page 498; answer page 41; matched by Chapter 6 section order and content evidence [records, asks, them, order, possible, combinations, free]. Source: Answer manual. Added math explanation: yes.
+Exercise 29: question page 498; answer page 41; matched by Chapter 6 section order and content evidence [mailboxes]. Source: Answer manual.
+Exercise 30: question page 498; answer page 41; matched by Chapter 6 section order and content evidence [input, line, account, locks, accounts, lock, waiting, other]. Source: Answer manual.
+Exercise 31: question page 498; answer page 41; matched by Chapter 6 section order and content evidence [release, already, possible, danger, existing, ones]. Source: Answer manual.
+Exercise 32: question page 498; answer page 42; matched by Chapter 6 section order and content evidence [blocks, again, grade]. Source: Answer manual.
+Exercise 33: question page 498; answer page 42; matched by Chapter 6 section order and content evidence [memory, virtual, time, sharing, were, developed]. Source: Answer manual.
+Exercise 34: question page 498; answer page 42; matched by Chapter 6 section order and content evidence [livelock, starvation]. Source: Answer manual.
+Exercise 35: question page 498; answer page 42; matched by Chapter 6 section order and content evidence [again, livelock, anomaly]. Source: Answer manual.
+Exercise 36: question page 498; answer page 42; matched by Chapter 6 section order and content evidence [access, stations, detect, ethernet, requesting, channel, transmission, time]. Source: Answer manual.
+Exercise 37: question page 499; answer page 43; matched by Chapter 6 section order and content evidence [competition, consumer, mutex, mutual, exclusion, before, both, communication]. Source: Answer manual.
+Exercise 38: question page 499; answer page 43; matched by Chapter 6 section order and content evidence [other, both, next, request, woofer, doghouse, programmed, computers]. Source: Answer manual.
+Exercise 39: question page 499; no answer found in Chapter 6 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 40: question page 499; no answer found in Chapter 6 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 41: question page 500; no answer found in Chapter 6 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 42: question page 500; no answer found in Chapter 6 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 43: question page 500; no answer found in Chapter 6 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 44: question page 500; no answer found in Chapter 6 answer section; prepared answer included. Source: Independently prepared technical answer.
+
+Boundary verification
+---------------------
+First question: Exercise 1: Give an example of a deadlock taken from politics....
+Last question: Exercise 44: In certain countries, when two people meet they bow to each other. The protocol is that one of them bows first and stays...
+First answer: Answer 1: In the U.S., consider a presidential election in which three or more candidates are trying for the nomination of some pa...
+Last answer in Chapter 6 answer section: Answer 38: If both programs ask for Woofer first, the computers will starve with the endless sequence: request Woofer, cancel reque...
+
+Notes
+-----
+The provided answer PDF contains numbered Chapter 6 answers only through Exercise 38.
+Exercises 39 through 44 are included from the textbook and answered with clearly labeled prepared technical answers.
+Manual answers with calculations or formulas include separately labeled math explanations prepared from textbook concepts.
+No practical experiment was claimed to have been executed.
+PDF extraction repairs were limited to removing page headers/footers, joining words split by line-end hyphenation, normalizing Unicode punctuation, and restoring small obvious math formatting artifacts.

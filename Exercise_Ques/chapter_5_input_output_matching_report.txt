@@ -1,0 +1,95 @@
+Chapter 5 exercise matching report
+==================================
+
+Textbook source section: Chapter 5 INPUT/OUTPUT PROBLEMS, beginning with Exercise 1 and ending before Chapter 6.
+Answer source section: SOLUTIONS TO CHAPTER 5 PROBLEMS, ending before SOLUTIONS TO CHAPTER 6 PROBLEMS.
+
+Total questions found: 57
+Total answers found in Chapter 5 answer section: 55
+Total answer-manual answers matched confidently: 54
+Total prepared answers added for missing manual answers: 3
+Total added math explanations: 21
+Questions without an answer in the final PDF: none
+Questions not matched in the answer manual: 55, 56, 57
+Unused answer-manual item: 33 (content did not match textbook Exercise 33; later answers were matched by content).
+Duplicate question numbers: none
+Duplicate answer numbers: none
+Question numbering inconsistencies: none
+Answer numbering inconsistencies: none, but answer-manual item 33 is an extra/out-of-sequence content mismatch
+Uncertain matches: none
+
+Per-exercise mapping
+--------------------
+Exercise 1: question page 430; answer page 29; matched by Chapter 5 section order/content evidence [controller]. Source: Answer manual.
+Exercise 2: question page 430; answer page 29; matched by Chapter 5 section order/content evidence [scanner, network]. Source: Answer manual.
+Exercise 3: question page 430; answer page 29; matched by Chapter 5 section order/content evidence [memory, first, improvement, idea]. Source: Answer manual.
+Exercise 4: question page 430; answer page 29; matched by Chapter 5 section order/content evidence [precise, imprecise, interrupts, machine]. Source: Answer manual.
+Exercise 5: question page 430; answer page 29; matched by Chapter 5 section order/content evidence [controller, five, channels, nsec, response, takes]. Source: Answer manual. Added math explanation: yes.
+Exercise 6: question page 430; answer page 29; matched by Chapter 5 section order/content evidence [transfer, controller, nsec, acquire, word, 1000, time, mode]. Source: Answer manual. Added math explanation: yes.
+Exercise 7: question page 460; answer page 30; matched by Chapter 5 section order/content evidence [controller, word, write, memory, copy, advantage, disadvantage, method]. Source: Answer manual.
+Exercise 8: question page 460; answer page 30; matched by Chapter 5 section order/content evidence [nsec, interrupt, onto, stack, maximum, number, interrupts, second]. Source: Answer manual. Added math explanation: yes.
+Exercise 9: question page 460; answer page 30; matched by Chapter 5 section order/content evidence [interrupts, instructions, interrupt, currently, finish]. Source: Answer manual.
+Exercise 10: question page 460; answer page 30; matched by Chapter 5 section order/content evidence [interrupt, character, printer, start, service, procedure, reason, doing]. Source: Answer manual.
+Exercise 11: question page 460; answer page 30; matched by Chapter 5 section order/content evidence [pipeline, instruction, fetched, pointed, instructions, first, machine, precise]. Source: Answer manual.
+Exercise 12: question page 460; answer page 30; matched by Chapter 5 section order/content evidence [characters, printer, time, character, using, interrupt, driven]. Source: Answer manual. Added math explanation: yes.
+Exercise 13: question page 460; answer page 31; matched by Chapter 5 section order/content evidence [official sequential answer section]. Source: Answer manual.
+Exercise 14: question page 460; answer page 31; matched by Chapter 5 section order/content evidence [software, user]. Source: Answer manual.
+Exercise 15: question page 460; answer page 31; matched by Chapter 5 section order/content evidence [network, data, bytes, rate, packet, takes, msec, 1024]. Source: Answer manual. Added math explanation: yes.
+Exercise 16: question page 461; answer page 31; matched by Chapter 5 section order/content evidence [output, printer]. Source: Answer manual.
+Exercise 17: question page 461; answer page 31; matched by Chapter 5 section order/content evidence [cylinder, skew, seek, time, msec, sectors]. Source: Answer manual. Added math explanation: yes.
+Exercise 18: question page 461; answer page 31; matched by Chapter 5 section order/content evidence [7200, sector]. Source: Answer manual. Added math explanation: yes.
+Exercise 19: question page 461; answer page 31; matched by Chapter 5 section order/content evidence [bytes]. Source: Answer manual. Added math explanation: yes.
+Exercise 20: question page 461; answer page 31; matched by Chapter 5 section order/content evidence [raid, level, correct, single, errors, drive, also, drives]. Source: Answer manual.
+Exercise 21: question page 461; answer page 31; matched by Chapter 5 section order/content evidence [raid, probability]. Source: Answer manual. Added math explanation: yes.
+Exercise 22: question page 461; answer page 31; matched by Chapter 5 section order/content evidence [raid, level, read, performance, write, space, overhead, reliability]. Source: Answer manual.
+Exercise 23: question page 461; answer page 32; matched by Chapter 5 section order/content evidence [pebibytes, zebibyte]. Source: Answer manual. Added math explanation: yes.
+Exercise 24: question page 461; answer page 32; matched by Chapter 5 section order/content evidence [magnetic, generated]. Source: Answer manual.
+Exercise 25: question page 461; answer page 32; matched by Chapter 5 section order/content evidence [optical, magnetic]. Source: Answer manual.
+Exercise 26: question page 461; answer page 32; matched by Chapter 5 section order/content evidence [interleaving]. Source: Answer manual.
+Exercise 27: question page 461; answer page 32; matched by Chapter 5 section order/content evidence [double, interleaving, cylinder, skew, avoid, missing, track, seek]. Source: Answer manual.
+Exercise 28: question page 461; answer page 32; matched by Chapter 5 section order/content evidence [consider, cylinders, cylinder, sectors, bytes, seek, time, msec]. Source: Answer manual. Added math explanation: yes.
+Exercise 29: question page 462; answer page 33; matched by Chapter 5 section order/content evidence [properties, drive, same, worse]. Source: Answer manual.
+Exercise 30: question page 462; answer page 33; matched by Chapter 5 section order/content evidence [partition, table, partitions, change]. Source: Answer manual.
+Exercise 31: question page 462; answer page 33; matched by Chapter 5 section order/content evidence [cylinders, msec]. Source: Answer manual. Added math explanation: yes.
+Exercise 32: question page 462; answer page 33; matched by Chapter 5 section order/content evidence [elevator, algorithm, scan, modified]. Source: Answer manual.
+Exercise 33: question page 462; manual answer number 34; answer page 33; matched by Chapter 5 section order/content evidence [unix, driver, elevator, algorithm, requests, order, harry, program]. Source: Answer manual.
+Exercise 34: question page 462; manual answer number 35; answer page 33; matched by Chapter 5 section order/content evidence [stable, nonvolatile, write, crash, before, block, race]. Source: Answer manual.
+Exercise 35: question page 462; manual answer number 36; answer page 33; matched by Chapter 5 section order/content evidence [consistent, during, crashes, again, recovery, procedure]. Source: Answer manual.
+Exercise 36: question page 462; manual answer number 37; answer page 34; matched by Chapter 5 section order/content evidence [problems, arise, recovery, scenarios, shown, figure]. Source: Answer manual.
+Exercise 37: question page 462; manual answer number 38; answer page 34; matched by Chapter 5 section order/content evidence [msec]. Source: Answer manual. Added math explanation: yes.
+Exercise 38: question page 462; manual answer number 39; answer page 34; matched by Chapter 5 section order/content evidence [clock, crystal, value, holding, register, millisecond, tick, every]. Source: Answer manual. Added math explanation: yes.
+Exercise 39: question page 463; manual answer number 40; answer page 34; matched by Chapter 5 section order/content evidence [current, time, 5000, header, next, signal, 5005, 5013]. Source: Answer manual.
+Exercise 40: question page 463; manual answer number 41; answer page 34; matched by Chapter 5 section order/content evidence [number, seconds, around, year, happen]. Source: Answer manual. Added math explanation: yes.
+Exercise 41: question page 463; manual answer number 42; answer page 34; matched by Chapter 5 section order/content evidence [window, lines, copying, characters, character, take, whole, nsec]. Source: Answer manual. Added math explanation: yes.
+Exercise 42: question page 463; manual answer number 43; answer page 35; matched by Chapter 5 section order/content evidence [after, driver, output]. Source: Answer manual.
+Exercise 43: question page 463; manual answer number 44; answer page 35; matched by Chapter 5 section order/content evidence [delete, line, cursor, sequence]. Source: Answer manual.
+Exercise 44: question page 463; manual answer number 45; answer page 35; matched by Chapter 5 section order/content evidence [mouse, maximum, rate, bytes]. Source: Answer manual. Added math explanation: yes.
+Exercise 45: question page 463; manual answer number 46; answer page 35; matched by Chapter 5 section order/content evidence [colors, blue, color, cannot, represented]. Source: Answer manual.
+Exercise 46: question page 463; manual answer number 47; answer page 35; matched by Chapter 5 section order/content evidence [character, table, space, byte, takes, nsec, output, rate]. Source: Answer manual. Added math explanation: yes.
+Exercise 47: question page 463; manual answer number 48; answer page 35; matched by Chapter 5 section order/content evidence [screen, text, about, 1024, graphics]. Source: Answer manual. Added math explanation: yes.
+Exercise 48: question page 463; manual answer number 49; answer page 35; matched by Chapter 5 section order/content evidence [like]. Source: Answer manual.
+Exercise 49: question page 463; manual answer number 50; answer page 35; matched by Chapter 5 section order/content evidence [rectangle, first, parameter, coordinates, specified]. Source: Answer manual.
+Exercise 50: question page 464; manual answer number 51; answer page 35; matched by Chapter 5 section order/content evidence [display, size, fast, ethernet]. Source: Answer manual. Added math explanation: yes.
+Exercise 51: question page 464; manual answer number 52; answer page 36; matched by Chapter 5 section order/content evidence [well, mbps, network, users, browsing]. Source: Answer manual.
+Exercise 52: question page 464; manual answer number 53; answer page 36; matched by Chapter 5 section order/content evidence [advantages, disadvantages, thin, client]. Source: Answer manual.
+Exercise 53: question page 464; manual answer number 54; answer page 36; matched by Chapter 5 section order/content evidence [voltage, drops, speed, time, msec, energy, saving, percent]. Source: Answer manual. Added math explanation: yes.
+Exercise 54: question page 464; manual answer number 55; answer page 36; matched by Chapter 5 section order/content evidence [down, display, hard, text, mode, uses]. Source: Answer manual.
+Exercise 55: question page 464; no answer found in Chapter 5 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 56: question page 464; no answer found in Chapter 5 answer section; prepared answer included. Source: Independently prepared technical answer.
+Exercise 57: question page 464; no answer found in Chapter 5 answer section; prepared answer included. Source: Independently prepared technical answer.
+
+Boundary verification
+---------------------
+First question: Exercise 1: Advances in chip technology have made it possible to put an entire controller, including all the bus access logic, on an...
+Last question: Exercise 57: Write a program to implement multiple timers using a single clock. Input for this program consists of a sequence of four...
+First answer: Answer 1: In the figure, we see controllers and devices as separate units. The reason is to allow a controller to handle multiple ...
+Last answer in Chapter 5 answer section: Answer 55: The windowing system uses much more memory for its display and uses virtual memory more than the text mode. This makes i...
+
+Notes
+-----
+The provided answer PDF contains numbered Chapter 5 answers through item 55, but answer-manual item 33 does not match textbook Exercise 33.
+Textbook Exercises 33 through 54 were matched to answer-manual items 34 through 55 by content.
+Exercises 55 through 57 are included from the textbook and answered with clearly labeled prepared technical answers.
+Manual answers with calculations or formulas include separately labeled math explanations prepared from textbook concepts.
+No practical experiment was claimed to have been executed.
+PDF extraction repairs were limited to removing page headers/footers, joining words split by line-end hyphenation, normalizing Unicode punctuation, and restoring small obvious math formatting artifacts.
